@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Ofir Saportas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0a0a;
+      --yellow:  #FFCD38;
+      --text:    #f9f9f9;
+      --muted:   #6b7280;
+      --border:  rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── CURSOR ─── */
+    #cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--yellow); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform 0.05s, width 0.2s, height 0.2s;
+    }
+    #cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid rgba(255,205,56,0.5); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: left 0.12s ease, top 0.12s ease, width 0.2s, height 0.2s;
+    }
+
+    /* ─── PROGRESS BAR ─── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: var(--yellow); z-index: 200; width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 64px;
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2px solid var(--yellow); object-fit: cover;
+    }
+    .nav-name { font-size: 16px; font-weight: 600; color: var(--text); text-wrap: balance; }
+    .nav-links { display: flex; gap: 40px; }
+    .nav-links a {
+      font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(249,249,249,0.55); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    /* ─── ABOUT HERO ─── */
+    .about-hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 160px 64px 120px;
+      display: flex;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-photo-wrap {
+      flex: 0 0 420px;
+      position: relative;
+    }
+    .about-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 26px;
+      background: linear-gradient(145deg, var(--yellow) 0%, transparent 55%);
+      z-index: 0;
+    }
+    .about-photo {
+      width: 100%;
+      border-radius: 24px;
+      display: block;
+      position: relative;
+      z-index: 1;
+      object-fit: cover;
+      aspect-ratio: 3/4;
+    }
+
+    .about-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .about-label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+    .about-greeting {
+      font-size: clamp(48px, 5vw, 72px);
+      font-weight: 900;
+      line-height: 1.05;
+      text-wrap: balance;
+    }
+    .about-greeting span { color: var(--yellow); }
+
+    .about-bio p {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(249,249,249,0.65);
+      line-height: 1.85;
+      margin-bottom: 14px;
+      text-wrap: pretty;
+    }
+    .about-bio p:last-child { margin-bottom: 0; }
+
+    .scroll-hint {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding-top: 8px;
+    }
+    .scroll-hint span {
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(249,249,249,0.3);
+    }
+    .scroll-arrow {
+      width: 52px; height: 52px; border-radius: 50%;
+      border: 1.5px solid rgba(255,205,56,0.4);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--yellow); text-decoration: none;
+      animation: bounce 1.8s ease-in-out infinite;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 24px rgba(255,205,56,0.1);
+    }
+    .scroll-arrow:hover {
+      border-color: var(--yellow);
+      background: rgba(255,205,56,0.08);
+      box-shadow: 0 0 36px rgba(255,205,56,0.2);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(8px); }
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+      background: linear-gradient(170deg, transparent 0%, rgba(255,205,56,0.03) 50%, transparent 100%);
+      position: relative;
+    }
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse at center, rgba(255,205,56,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-heading {
+      font-size: clamp(32px, 4vw, 54px);
+      font-weight: 900;
+      text-align: center;
+      text-wrap: balance;
+      position: relative;
+    }
+    .contact-heading span { color: var(--yellow); }
+    .contact-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(249,249,249,0.45);
+      text-align: center;
+      max-width: 480px;
+      text-wrap: pretty;
+      position: relative;
+    }
+    .contact-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+    }
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+    .contact-btn:hover { transform: translateY(-2px); }
+    .contact-btn.email {
+      background: var(--yellow);
+      color: #0a0a0a;
+      box-shadow: 0 8px 32px rgba(255,205,56,0.2);
+    }
+    .contact-btn.email:hover { box-shadow: 0 12px 44px rgba(255,205,56,0.38); }
+    .contact-btn.linkedin {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .contact-btn.linkedin:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.15); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    footer span:last-child { font-size: 13px; color: var(--muted); }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .about-hero { flex-direction: column; padding: 120px 24px 80px; gap: 48px; }
+      .about-photo-wrap { flex: none; width: 100%; max-width: 380px; align-self: center; }
+      nav { padding: 16px 24px; }
+      .contact-section { padding: 80px 24px; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+  <div id="progress-bar"></div>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-brand">
+      <img src="images/avatar-face.png" class="nav-avatar" alt="Ofir Saportas" />
+      <span class="nav-name">Ofir Saportas</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#projects">Projects</a>
+      <a href="about.html" class="active">About Me</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ABOUT HERO -->
+    <div class="about-hero reveal">
+      <div class="about-photo-wrap">
+        <!-- שמרי את התמונה כ: public/images/ofir-photo.jpg ועדכני את ה-src -->
+        <img
+          src="https://www.figma.com/api/mcp/asset/30cafb63-8f85-46ec-9354-6067127c977d"
+          class="about-photo"
+          alt="Ofir Saportas"
+        />
+      </div>
+
+      <div class="about-text">
+        <p class="about-label">About Me</p>
+        <h1 class="about-greeting">Hi, <span>I'm Ofir</span></h1>
+        <div class="about-bio">
+          <p>Since I can remember, I've always loved creating and thinking about unique solutions. My first "invention" was in second grade - I kept a sketchbook where I wrote down all my ideas.</p>
+          <p>When I discovered industrial design, I immediately knew it was the right path for me. I enjoy understanding how things work and designing solutions for people while considering their environment.</p>
+          <p>As a designer, I believe empathy is one of our most important tools. I listen before I design, trying to understand people's experiences and needs before creating solutions.</p>
+          <p>Beyond design, I'm a maker at heart. I love building and experimenting with DIY projects, and I'm always excited to learn something new.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCROLL HINT -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:0 0 80px;">
+      <span style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(249,249,249,0.3);">get in touch</span>
+      <a href="#contact" class="scroll-arrow" aria-label="Scroll to contact">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="contact-section reveal">
+      <h2 class="contact-heading">Let's work <span>together</span></h2>
+      <div class="contact-links">
+        <a href="mailto:ofirsaportas@gmail.com" class="contact-btn email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          ofirsaportas@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/ofir-saportas/?skipRedirect=true" target="_blank" rel="noopener" class="contact-btn linkedin">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect width="4" height="12" x="2" y="9"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <span class="footer-name">Ofir Saportas</span>
+    <span>Designed & built with ♥ - All rights reserved © 2026</span>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursor-ring');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+      ring.style.left   = e.clientX + 'px'; ring.style.top   = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.width='52px'; ring.style.height='52px'; });
+      el.addEventListener('mouseleave', () => { ring.style.width='36px'; ring.style.height='36px'; });
+    });
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      document.getElementById('progress-bar').style.width = pct + '%';
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

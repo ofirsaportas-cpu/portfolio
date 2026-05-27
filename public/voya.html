@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VOYA - Case Study · Ofir Saportas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Heebo:wght@900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #242424;
+      --teal:      #5CC7CE;
+      --orange:    #EC652B;
+      --text:      #f9f9f9;
+      --muted:     #6b7280;
+      --card-bg:   #2d2d2d;
+      --border:    rgba(255,255,255,0.07);
+      --space-xs:  12px;
+      --space-sm:  24px;
+      --space-md:  48px;
+      --space-lg:  80px;
+      --space-xl:  120px;
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── CURSOR ─── */
+    #cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--teal); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform 0.05s, width 0.2s, height 0.2s;
+    }
+    #cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid rgba(92,199,206,0.5); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: transform 0.12s ease, width 0.2s, height 0.2s;
+    }
+    a, button { cursor: none; }
+
+    /* ─── PROGRESS BAR ─── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; z-index: 200;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--teal), var(--orange));
+      transition: width 0.1s linear;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none;
+    }
+    .nav-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      object-fit: cover; object-position: 50% 20%;
+      border: 2px solid var(--teal);
+    }
+    .nav-name { font-size: 20px; font-weight: 700; color: var(--text); }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 300; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--teal); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-4px); }
+
+    /* ─── LAYOUT ─── */
+    .page-wrapper { display: flex; flex-direction: column; width: 100%; }
+    .section { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .section-inner {
+      width: 100%; max-width: 1100px;
+      padding: var(--space-xl) 64px;
+      display: flex; flex-direction: column;
+      gap: var(--space-md);
+    }
+    .section-inner.narrow {
+      max-width: 860px; align-items: center; text-align: center;
+    }
+    .divider { width: 100%; border: none; border-top: 1px solid var(--border); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh; position: relative; overflow: hidden;
+      background: linear-gradient(170deg, #0a0a0a 38%, #0d2f33 63%, #0e3d42 90%);
+      display: flex; align-items: center;
+    }
+    .hero-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+    .hero-orb-1 { width: 600px; height: 600px; background: rgba(92,199,206,0.2); top: -100px; right: -100px; }
+    .hero-orb-2 { width: 400px; height: 400px; background: rgba(236,101,43,0.1); bottom: 0; left: 200px; }
+    .hero-inner {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 1200px; margin: 0 auto;
+      padding: 120px 64px 80px;
+      display: flex; flex-direction: row;
+      align-items: center; gap: 60px;
+    }
+    .hero-text { flex: 0 0 500px; display: flex; flex-direction: column; gap: var(--space-sm); }
+    .hero-image { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .hero-image img { width: 100%; max-width: 300px; border-radius: var(--radius-md); filter: drop-shadow(0 40px 80px rgba(92,199,206,0.3)); }
+    .tag { font-size: 10px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: var(--teal); }
+    .hero-title {
+      font-size: clamp(64px, 10vw, 112px);
+      font-weight: 900; line-height: 0.9; letter-spacing: -3px; text-align: left;
+    }
+    .hero-title span {
+      display: block;
+      background: linear-gradient(135deg, #fff 30%, var(--teal) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle { font-size: clamp(15px, 1.6vw, 19px); font-weight: 300; color: rgba(249,249,249,0.6); line-height: 1.7; text-align: left; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 32px; padding-top: var(--space-sm); border-top: 1px solid var(--border); }
+    .meta-item { display: flex; flex-direction: column; gap: 6px; }
+    .meta-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+    .meta-value { font-size: 14px; font-weight: 600; }
+
+    /* ─── SECTION LABELS & HEADINGS ─── */
+    .section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--teal); }
+    .section-label.orange { color: var(--orange); }
+    .section-title { font-size: clamp(32px, 4vw, 52px); font-weight: 900; line-height: 1.1; text-wrap: balance; }
+    .body-text { font-size: 17px; font-weight: 300; color: rgba(249,249,249,0.72); line-height: 1.9; max-width: 720px; text-wrap: pretty; }
+
+    /* ─── HMW STRIP ─── */
+    .hmw-strip {
+      width: 100%;
+      background: linear-gradient(135deg, #091a1b 0%, #0e2e33 50%, #0e3a40 100%);
+      border-top: 1px solid rgba(92,199,206,0.2);
+      border-bottom: 1px solid rgba(92,199,206,0.2);
+      display: flex; flex-direction: column; align-items: center;
+      padding: var(--space-lg) 64px;
+      gap: var(--space-sm); text-align: center;
+    }
+    .hmw-text {
+      font-size: clamp(20px, 2.8vw, 34px); font-weight: 600;
+      line-height: 1.5; max-width: 860px; text-wrap: balance;
+    }
+    .hmw-text em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--teal), var(--orange));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── CARDS ─── */
+    .cards-row { display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap; }
+    .card {
+      flex: 1; min-width: 240px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      display: flex; flex-direction: column; gap: var(--space-xs);
+      transition: border-color 0.3s;
+    }
+    .card:hover { border-color: rgba(92,199,206,0.3); }
+    .card-icon { color: var(--teal); margin-bottom: 4px; }
+    .card-icon svg { width: 32px; height: 32px; }
+    .card-title { font-size: 18px; font-weight: 700; }
+    .card-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; text-wrap: pretty; }
+
+    /* ─── RESEARCH GRID ─── */
+    .research-grid { display: flex; flex-direction: row; gap: 20px; }
+    .research-card {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: border-color 0.3s;
+    }
+    .research-card:hover { border-color: rgba(92,199,206,0.3); }
+    .research-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--teal); }
+    .research-title { font-size: 20px; font-weight: 700; }
+    .research-body { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; text-wrap: pretty; }
+
+    /* ─── BEFORE / AFTER ─── */
+    .before-after {
+      display: flex; flex-direction: row; gap: 32px; align-items: flex-start;
+    }
+    .before-col, .after-col {
+      flex: 1; display: flex; flex-direction: column; gap: 16px;
+    }
+    .ba-label {
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      font-weight: 600; padding: 6px 16px; border-radius: 999px;
+      display: inline-block; width: fit-content;
+    }
+    .ba-label.before { background: rgba(255,255,255,0.06); color: var(--muted); }
+    .ba-label.after { background: rgba(92,199,206,0.12); color: var(--teal); }
+    .ba-screens {
+      display: flex; flex-direction: row; gap: 12px; flex-wrap: wrap;
+    }
+    .ba-screen {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: #111;
+    }
+    .ba-screen img { width: 100%; display: block; }
+    .placeholder-img {
+      width: 100%; aspect-ratio: 9/16;
+      background: #1a1a1a;
+      border-radius: var(--radius-md);
+      border: 1px dashed rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; text-align: center; padding: 16px;
+    }
+
+    /* ─── DESIGN DECISIONS ─── */
+    .decisions-list { display: flex; flex-direction: column; gap: var(--space-md); }
+    .decision-card {
+      display: flex; flex-direction: row; gap: 60px; align-items: center;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 48px;
+      transition: border-color 0.3s;
+    }
+    .decision-card:hover { border-color: rgba(92,199,206,0.25); }
+    .decision-card.reverse { flex-direction: row-reverse; }
+    .decision-text { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .decision-img { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .decision-img img { width: 260px; border-radius: 20px; box-shadow: 0 20px 80px rgba(0,0,0,0.4); display: block; }
+    .decision-img .placeholder-img { width: 260px; aspect-ratio: 9/16; }
+    .decision-num { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); }
+    .decision-title { font-size: 28px; font-weight: 700; line-height: 1.2; text-wrap: balance; }
+    .decision-title span {
+      background: linear-gradient(135deg, var(--teal), var(--orange));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .decision-body { font-size: 16px; font-weight: 300; color: rgba(249,249,249,0.65); line-height: 1.8; text-wrap: pretty; }
+
+    /* ─── KEY SCREENS CAROUSEL ─── */
+    .screens-carousel {
+      display: flex; align-items: center; justify-content: center;
+      gap: 32px; width: 100%;
+    }
+    .carousel-track { position: relative; width: 300px; flex-shrink: 0; }
+    .carousel-slide { width: 300px; border-radius: 20px; box-shadow: 0 16px 64px rgba(0,0,0,0.5); display: none; }
+    .carousel-slide.active { display: block; }
+    .carousel-btn {
+      width: 52px; height: 52px; border-radius: 50%;
+      border: 1px solid rgba(92,199,206,0.3);
+      background: rgba(92,199,206,0.08);
+      color: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s, border-color 0.2s;
+    }
+    .carousel-btn:hover { background: rgba(92,199,206,0.18); border-color: rgba(92,199,206,0.6); }
+    .carousel-dots { display: flex; justify-content: center; gap: 8px; }
+    .carousel-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); transition: background 0.2s, width 0.2s;
+      cursor: pointer;
+    }
+    .carousel-dot.active { background: var(--teal); width: 20px; border-radius: 3px; }
+
+    /* ─── VERSION BAND ─── */
+    .version-band {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(92,199,206,0.06), rgba(236,101,43,0.04));
+      border-top: 1px solid rgba(92,199,206,0.15);
+      border-bottom: 1px solid rgba(92,199,206,0.15);
+      display: flex; flex-direction: column; align-items: center;
+      padding: var(--space-md) 64px;
+    }
+    .version-inner {
+      width: 100%; max-width: 1100px;
+      display: flex; flex-direction: row; align-items: center;
+      gap: 48px;
+    }
+    .version-tag { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--orange); }
+    .version-title { font-size: clamp(26px, 3.2vw, 42px); font-weight: 900; line-height: 1.1; text-wrap: balance; }
+    .version-desc { font-size: 16px; font-weight: 300; color: rgba(249,249,249,0.6); line-height: 1.8; max-width: 680px; text-wrap: pretty; }
+
+    /* ─── REFLECTION ─── */
+    .takeaway {
+      width: 100%;
+      background: linear-gradient(170deg, #0a0a0a 0%, #091a1b 50%, #0a0a0a 100%);
+      display: flex; flex-direction: column; align-items: center;
+      padding: var(--space-xl) 64px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .takeaway::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(92,199,206,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .takeaway-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); max-width: 900px; }
+    .takeaway-title { font-size: clamp(32px, 4.5vw, 56px); font-weight: 900; line-height: 1.15; text-wrap: balance; }
+    .takeaway-title span {
+      background: linear-gradient(135deg, #fff 20%, var(--teal) 60%, var(--orange) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .takeaway-body { font-size: 17px; font-weight: 300; color: rgba(249,249,249,0.55); line-height: 1.8; max-width: 680px; text-wrap: pretty; }
+
+    /* ─── IMAGES ─── */
+    .img-full { width: 100%; border-radius: var(--radius-md); display: block; border: 1px solid var(--border); }
+
+    /* ─── TYPOGRAPHY - PREVENT ORPHANS ─── */
+    .section-title, .hero-title, .version-title, .decision-title, .takeaway-title, .hmw-text { text-wrap: balance; }
+    .body-text, .card-desc, .version-desc, .decision-body, .research-body, .takeaway-body { text-wrap: pretty; }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .hero-inner { flex-direction: column; }
+      .hero-text { flex: none; }
+      .before-after { flex-direction: column; }
+      .research-grid { flex-direction: column; }
+      .decision-card, .decision-card.reverse { flex-direction: column; }
+    }
+    @media (max-width: 720px) {
+      nav { padding: 16px 24px; }
+      .section-inner { padding: 60px 24px; }
+      .hmw-strip, .version-band { padding: 48px 24px; }
+      .cards-row { flex-direction: column; }
+      .hero-image img { max-width: 180px; }
+      .hero-image { order: -1; }
+      .hero-text  { order: 1; }
+    }
+  .cs-footer-simple { border-top: 1px solid var(--border); padding: 32px 64px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; font-size: 13px; color: var(--muted); }
+  .cs-footer-simple .footer-name { font-weight: 600; color: var(--text); }
+  .contact-footer { background: #0a0a0a; padding: 120px 64px 0; text-align: center; }
+  .contact-footer-inner { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 36px; padding-bottom: 100px; }
+  .contact-eyebrow { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #ffcd38; font-weight: 400; }
+  .contact-heading { font-size: clamp(48px, 7vw, 80px); font-weight: 900; line-height: 1.0; color: #f9f9f9; margin: 0; }
+  .contact-heading-yellow { color: #ffcd38; }
+  .contact-body { font-size: 17px; font-weight: 300; color: #6b7280; line-height: 1.7; }
+  .contact-email-btn { display: inline-flex; align-items: center; gap: 16px; padding: 20px 48px; border: 1px solid rgba(255,205,56,0.4); border-radius: 100px; color: #f9f9f9; text-decoration: none; font-size: 15px; letter-spacing: 2px; font-weight: 300; transition: border-color 0.3s, background 0.3s; }
+  .contact-email-btn:hover { border-color: rgba(255,205,56,0.8); background: rgba(255,205,56,0.05); }
+  .contact-social { display: flex; gap: 32px; }
+  .contact-social a { font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #6b7280; text-decoration: none; font-weight: 300; transition: color 0.25s; }
+  .contact-social a:hover { color: #f9f9f9; }
+  .contact-footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding: 24px 64px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-name { font-size: 14px; font-weight: 600; color: #f9f9f9; }
+  .contact-footer-bottom span:last-child { font-size: 13px; color: #6b7280; }
+  @media (max-width: 720px) {
+    .contact-footer { padding: 80px 24px 0; }
+    .contact-footer-bottom { padding: 24px; flex-direction: column; gap: 8px; }
+  }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="images/avatar-face.png" class="nav-avatar" alt="Ofir Saportas" />
+    <span class="nav-name">Ofir Saportas</span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+    Back to Portfolio
+  </a>
+</nav>
+
+<div class="page-wrapper">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="tag">UX Design · Onboarding Redesign</p>
+        <h1 class="hero-title">
+          <span>VOYA</span>
+        </h1>
+        <p class="hero-subtitle">A lifestyle app that organizes your saved reels from social media into real travel plans.</p>
+        <div class="meta-row">
+          <div class="meta-item"><div class="meta-label">Role</div><div class="meta-value">UX Designer</div></div>
+          <div class="meta-item"><div class="meta-label">Type</div><div class="meta-value">Onboarding Redesign</div></div>
+          <div class="meta-item"><div class="meta-label">Status</div><div class="meta-value">In Development</div></div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="images/voya/cover.png" alt="VOYA onboarding screens" />
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- OVERVIEW -->
+  <section class="section reveal">
+    <div class="section-inner narrow">
+      <p class="section-label">Overview</p>
+      <p class="body-text" style="font-size: clamp(16px, 1.5vw, 20px); line-height: 1.8; max-width: 760px;">VOYA is a lifestyle app that collects your saved reels from social media, organizes them on a map, and helps you turn inspiration into real travel plans - with an AI trip planner and personalized recommendations. I joined the startup to redesign the onboarding experience from the ground up.</p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- THE PROBLEM -->
+  <section class="section reveal">
+    <div class="section-inner">
+      <p class="section-label">The Problem</p>
+      <h2 class="section-title">Strong product, weak first impression.</h2>
+      <p class="body-text">The original onboarding was built with AI and shipped fast - but it wasn't doing its job. It didn't reflect the aspirational lifestyle the app promises, and it was losing users before they even got started.</p>
+      <div class="cards-row">
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13.5V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.5"/><path d="M12 3v13"/><path d="m8 7 4-4 4 4"/></svg>
+          </div>
+          <div class="card-title">Missing the brand vibe</div>
+          <div class="card-desc">The visual language felt generic - it didn't communicate the luxury lifestyle and wanderlust the app was built around.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="card-title">Questions without purpose</div>
+          <div class="card-desc">Users were asked multiple personal questions with no clear reason - creating friction without delivering any visible value in return.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div class="card-title">Unclear value, weak paywall</div>
+          <div class="card-desc">Users reached the payment screen without fully understanding what they were paying for - and a 12-month plan made the price feel overwhelming.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HMW -->
+  <div class="hmw-strip reveal">
+    <p class="section-label">How Might We</p>
+    <p class="hmw-text">How might we make the onboarding feel as <em>aspirational and effortless</em> as the lifestyle VOYA promises?</p>
+  </div>
+
+
+  <!-- ORIGINAL SCREENS + FINDINGS -->
+  <section class="section reveal">
+    <div class="section-inner">
+      <p class="section-label">The original flow</p>
+      <h2 class="section-title">Lots of questions. No explanation. No feeling.</h2>
+      <p class="body-text" style="max-width:720px;">Three moments where the original onboarding lost users - before they ever saw what the app could do.</p>
+      <div style="display:flex;flex-direction:row;gap:32px;align-items:flex-start;margin-top:var(--space-sm);justify-content:center;width:100%;flex-wrap:wrap;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+          <img src="images/voya/original-1.jpeg" style="width:240px;border-radius:20px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid var(--border);" />
+          <div style="text-align:center;">
+            <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">01</p>
+            <p style="font-size:15px;font-weight:600;">No hook, no feeling</p>
+            <p style="font-size:13px;font-weight:300;color:rgba(249,249,249,0.5);margin-top:4px;max-width:200px;">A splash screen that didn't communicate what the app is about</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+          <video src="images/voya/original-2.mp4" autoplay loop muted playsinline style="width:240px;border-radius:20px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid var(--border);"></video>
+          <div style="text-align:center;">
+            <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">02</p>
+            <p style="font-size:15px;font-weight:600;">Questions with no payoff</p>
+            <p style="font-size:13px;font-weight:300;color:rgba(249,249,249,0.5);margin-top:4px;max-width:200px;">Multiple personal questions before users understood what they were signing up for</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+          <img src="images/voya/original-3.jpeg" style="width:240px;border-radius:20px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid var(--border);" />
+          <div style="text-align:center;">
+            <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">03</p>
+            <p style="font-size:15px;font-weight:600;">A paywall that felt like a wall</p>
+            <p style="font-size:13px;font-weight:300;color:rgba(249,249,249,0.5);margin-top:4px;max-width:200px;">Users reached the payment screen without understanding what they were paying for</p>
+          </div>
+        </div>
+      </div>
+      <div class="cards-row" style="margin-top:var(--space-md);">
+        <div class="card" style="border-left:3px solid var(--teal);">
+          <div class="card-title">What I found</div>
+          <p class="card-desc">Users were dropping off mid-flow. The questions felt like a survey, not a welcome - and by the time they reached the app, some had already lost interest in what it could offer.</p>
+        </div>
+        <div class="card" style="border-left:3px solid var(--orange);">
+          <div class="card-title">The core tension</div>
+          <p class="card-desc">The product team's need to know the user clashed with the user's need to feel the app first. That conflict lived in every screen - and asking too much, too early, cost them conversions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- RESEARCH -->
+  <section class="section reveal">
+    <div class="section-inner">
+      <p class="section-label">Research</p>
+      <h2 class="section-title">I looked at what the best apps do differently.</h2>
+      <p class="body-text">Before designing, I mapped the competitive landscape, studied the vibe I wanted to create, and identified what matters most to the user in the first 60 seconds of an app.</p>
+      <div class="research-grid">
+        <div class="research-card">
+          <p class="research-tag">Competitor Analysis</p>
+          <h3 class="research-title">Similar apps + the best in the world</h3>
+          <p class="research-body">I analyzed direct competitors in the travel space, and then looked beyond - at Airbnb, Spotify, and other top-tier apps that nail their first impression. The goal: understand what separates a forgettable onboarding from one that actually converts.</p>
+        </div>
+        <div class="research-card">
+          <p class="research-tag">Vibe Research</p>
+          <h3 class="research-title">The aesthetic of wanderlust</h3>
+          <p class="research-body">I explored the visual language of luxury travel - the colors, photography style, and typography that communicate "this is the life you want." That became the visual north star for the redesign.</p>
+        </div>
+        <div class="research-card">
+          <p class="research-tag">User Needs Mapping</p>
+          <h3 class="research-title">What users need in 60 seconds</h3>
+          <p class="research-body">In the first minute, users need to understand: what is this? what do I get? and why now? The original onboarding answered none of these clearly. The redesign was built around answering all three.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- V2 VERSION BAND -->
+  <div class="version-band" style="border-color:rgba(236,101,43,0.2);background:linear-gradient(90deg,rgba(236,101,43,0.06),rgba(92,199,206,0.03));">
+    <div class="version-inner">
+      <div style="white-space:nowrap;">
+        <div class="version-tag" style="color:var(--teal);">Version 02</div>
+        <h2 class="version-title" style="margin-top:8px;">Show first,<br/>ask less, convert more</h2>
+      </div>
+      <p class="version-desc">Instead of starting with questions, V2 starts with one lightweight moment of connection - then earns commitment by showing users what they'll get. Every screen has one job, and nothing comes before value.</p>
+    </div>
+  </div>
+
+  <!-- DESIGN DECISIONS -->
+  <section class="section reveal">
+    <div class="section-inner">
+      <p class="section-label">Design Decisions</p>
+      <h2 class="section-title">Three things that changed everything</h2>
+      <div class="decisions-list">
+
+        <div class="decision-card">
+          <div class="decision-text">
+            <div class="decision-num">Decision 01</div>
+            <h3 class="decision-title">A <span>welcoming first screen</span> - with far fewer questions</h3>
+            <p class="decision-body">The original flow opened cold and asked too much, too fast. I redesigned the splash screen to immediately communicate the app's vibe and aspirational feel - and cut the questions down to only what's essential, so users move forward without friction.</p>
+          </div>
+          <div class="decision-img">
+            <video src="images/voya/decision-1.mp4" autoplay loop muted playsinline style="width:260px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
+          </div>
+        </div>
+
+        <div class="decision-card reverse">
+          <div class="decision-text">
+            <div class="decision-num">Decision 02</div>
+            <h3 class="decision-title"><span>Show the value</span> before asking for anything</h3>
+            <p class="decision-body">Before asking users to pay or commit, the redesign takes them through the key features - what the map looks like, how the AI planner works, and what they'll actually get. Users arrive at the paywall already convinced.</p>
+          </div>
+          <div class="decision-img">
+            <video src="images/voya/decision-2.MP4" autoplay loop muted playsinline style="width:260px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-text">
+            <div class="decision-num">Decision 03</div>
+            <h3 class="decision-title">Sell the <span>lifestyle, not the subscription</span></h3>
+            <p class="decision-body">The payment screen was redesigned to feel like the destination, not a form. We also removed the 12-month plan - it made the price feel heavy before users were ready. The focus shifted to the experience they're unlocking, not the cost.</p>
+          </div>
+          <div class="decision-img">
+            <video src="images/voya/decision-3.mp4" autoplay loop muted playsinline style="width:260px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REFLECTION -->
+  <div class="takeaway reveal">
+    <div class="takeaway-inner">
+      <p class="section-label">Reflection</p>
+      <h2 class="takeaway-title">From <span>AI output to human feeling</span></h2>
+      <p class="takeaway-body">The biggest lesson from this project: onboarding isn't about collecting information - it's about making a promise. Every screen should earn the next tap. The moment we stopped asking users for data and started showing them what they'd gain, everything felt better.</p>
+      <p class="takeaway-body" style="margin-top:12px;">The redesign is currently heading into user testing. I'm looking forward to seeing whether the aspiration actually converts.</p>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div style="width:100%; display:flex; justify-content:center;">
+    <div style="width:100%;max-width:1100px;padding:60px 64px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <p style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#6b7280;margin:0;">Back to Portfolio</p>
+        <a href="index.html" style="font-size:24px;font-weight:900;color:#f9f9f9;text-decoration:none;">← All Projects</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+        <p style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#6b7280;margin:0;">Next Project</p>
+        <a href="waze.html" style="font-size:24px;font-weight:900;color:#f9f9f9;text-decoration:none;">Waze →</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-wrapper -->
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursor-ring');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+    ring.style.left   = e.clientX + 'px'; ring.style.top   = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.width='52px'; ring.style.height='52px'; });
+    el.addEventListener('mouseleave', () => { ring.style.width='36px'; ring.style.height='36px'; });
+  });
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Carousel
+  let carouselIndex = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dotsContainer = document.getElementById('carouselDots');
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+  function goToSlide(n) {
+    const prev = slides[carouselIndex];
+    if (prev.tagName === 'VIDEO') prev.pause();
+    prev.classList.remove('active');
+    dotsContainer.children[carouselIndex].classList.remove('active');
+    carouselIndex = (n + slides.length) % slides.length;
+    const next = slides[carouselIndex];
+    next.classList.add('active');
+    dotsContainer.children[carouselIndex].classList.add('active');
+    if (next.tagName === 'VIDEO') { next.currentTime = 0; next.play(); }
+  }
+  function moveCarousel(dir) { goToSlide(carouselIndex + dir); }
+</script>
+
+  <footer class="cs-footer-simple">
+    <span class="footer-name">Ofir Saportas</span>
+    <span>All rights reserved © 2026</span>
+  </footer>
+
+  <script src="/mobile-popup.js"></script>
+</body>
+</html>

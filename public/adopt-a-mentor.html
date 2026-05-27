@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <title>Adopt A Mentor - Case Study · Ofir Saportas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Heebo:wght@900&display=swap" rel="stylesheet" />
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <script>
+    if (window.location.hash.includes('figmacapture')) {
+      document.addEventListener('DOMContentLoaded', function() {
+        var s = document.createElement('style');
+        s.textContent = '.reveal { opacity: 1 !important; transform: none !important; transition: none !important; }';
+        document.head.appendChild(s);
+        document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
+      });
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #242424;
+      --accent:    #ffcd38;
+      --rose:      #f43f5e;
+      --orange:    #f86825;
+      --text:      #f9f9f9;
+      --muted:     #6b7280;
+      --card-bg:   #2d2d2d;
+      --border:    rgba(255,255,255,0.07);
+      --space-xs:  12px;
+      --space-sm:  24px;
+      --space-md:  48px;
+      --space-lg:  80px;
+      --space-xl:  120px;
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── CURSOR ─── */
+    #cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: #F33351; border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform 0.05s, width 0.2s, height 0.2s;
+    }
+    #cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid rgba(243,51,81,0.5); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: transform 0.12s ease, width 0.2s, height 0.2s;
+    }
+    a, button { cursor: none; }
+
+    /* ─── PROGRESS BAR ─── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; z-index: 200;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--rose), var(--orange));
+      transition: width 0.1s linear;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none;
+    }
+    .nav-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      object-fit: cover; object-position: 50% 20%;
+      border: 2px solid #F33351;
+    }
+    .nav-name { font-size: 20px; font-weight: 700; color: var(--text); }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 300; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--accent); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-4px); }
+
+    /* ─── LAYOUT PRIMITIVES (Auto-layout equivalents) ─── */
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .section-inner {
+      width: 100%;
+      max-width: 1100px;
+      padding: var(--space-xl) 64px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .section-inner.narrow {
+      max-width: 860px;
+      align-items: center;
+      text-align: center;
+    }
+    .row {
+      display: flex;
+      flex-direction: row;
+      gap: var(--space-md);
+      align-items: flex-start;
+    }
+    .row.center { align-items: center; }
+    .col { display: flex; flex-direction: column; gap: var(--space-sm); flex: 1; }
+    .divider { width: 100%; border: none; border-top: 1px solid var(--border); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      position: relative; overflow: hidden;
+      background: linear-gradient(170deg, #0a0a0a 38%, #3a0c18 63%, #7c1e35 90%);
+      display: flex; align-items: center;
+    }
+    .hero-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(100px); pointer-events: none;
+    }
+    .hero-orb-1 {
+      width: 600px; height: 600px;
+      background: rgba(244,63,94,0.25);
+      top: -100px; right: -100px;
+    }
+    .hero-orb-2 {
+      width: 400px; height: 400px;
+      background: rgba(248,104,37,0.1);
+      bottom: 0; left: 200px;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 1200px; margin: 0 auto;
+      padding: 120px 64px 80px;
+      display: flex; flex-direction: row;
+      align-items: center; gap: 60px;
+    }
+    .hero-text {
+      flex: 0 0 500px;
+      display: flex; flex-direction: column; gap: var(--space-sm);
+    }
+    .hero-image {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-image img {
+      width: 100%; max-width: 680px;
+    }
+    .tag {
+      font-size: 10px; font-weight: 300; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--rose);
+    }
+    .hero-title {
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 900; line-height: 0.95; letter-spacing: -2px; text-align: left;
+    }
+    .hero-title span {
+      display: block;
+      background: linear-gradient(135deg, #fff 30%, #f43f5e 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: clamp(15px, 1.6vw, 19px);
+      font-weight: 300; color: rgba(249,249,249,0.6);
+      line-height: 1.7; text-align: left;
+    }
+    .meta-row {
+      display: flex; flex-wrap: wrap; gap: 32px;
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--border);
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 6px; }
+    .meta-label {
+      font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .meta-value { font-size: 14px; font-weight: 600; }
+
+    /* ─── SECTION LABELS & HEADINGS ─── */
+    .section-label {
+      font-size: 10px; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--rose);
+    }
+    .section-label.orange { color: var(--orange); }
+    .section-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 900; line-height: 1.1;
+    }
+    .body-text {
+      font-size: 17px; font-weight: 300;
+      color: rgba(249,249,249,0.72); line-height: 1.9;
+      max-width: 720px;
+    }
+
+    /* ─── QUOTE ─── */
+    .quote-block {
+      border-left: 3px solid var(--rose);
+      padding: 8px 0 8px 32px;
+    }
+    .quote-text {
+      font-size: clamp(18px, 2vw, 26px);
+      font-weight: 300; line-height: 1.6;
+      color: var(--text); font-style: italic;
+    }
+
+    /* ─── HMW STRIP ─── */
+    .hmw-strip {
+      width: 100%;
+      background: linear-gradient(135deg, #1a0a0e 0%, #3d0c18 50%, #5c1425 100%);
+      border-top: 1px solid rgba(244,63,94,0.2);
+      border-bottom: 1px solid rgba(244,63,94,0.2);
+      display: flex; flex-direction: column; align-items: center;
+      padding: var(--space-lg) 64px;
+      gap: var(--space-sm);
+      text-align: center;
+    }
+    .hmw-text {
+      font-size: clamp(20px, 2.8vw, 34px); font-weight: 600;
+      line-height: 1.5; max-width: 860px;
+    }
+    .hmw-text em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--orange), var(--rose));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── CARDS ─── */
+    .cards-row {
+      display: flex; flex-direction: row;
+      gap: 20px; flex-wrap: wrap;
+    }
+    .card {
+      flex: 1; min-width: 240px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      display: flex; flex-direction: column; gap: var(--space-xs);
+      transition: border-color 0.3s;
+    }
+    .card:hover { border-color: rgba(244,63,94,0.3); }
+    .card-icon { color: var(--rose); margin-bottom: 4px; }
+    .card-icon svg { width: 40px; height: 40px; }
+    .card-icon.orange { color: var(--orange); }
+    .card-num {
+      font-size: 28px; font-weight: 900; line-height: 1;
+      color: rgba(244,63,94,0.15); font-family: 'Heebo', sans-serif;
+    }
+    .card-title { font-size: 18px; font-weight: 700; }
+    .card-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; }
+
+    /* ─── PERSONAS ─── */
+    .personas-grid {
+      display: flex; flex-direction: row; gap: 52px;
+      position: relative;
+    }
+    .personas-grid::after {
+      content: '';
+      position: absolute; top: 8%; bottom: 8%; left: 50%; transform: translateX(-50%);
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(244,63,94,0.35) 25%, rgba(244,63,94,0.35) 75%, transparent);
+      pointer-events: none;
+    }
+    .persona-card {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px;
+      display: flex; flex-direction: column; gap: var(--space-xs);
+      transition: border-color 0.3s;
+    }
+    .persona-card:hover { border-color: rgba(244,63,94,0.25); }
+    .persona-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(249,249,249,0.45); margin-top: 16px; }
+    .persona-text strong, .pain-item strong { color: rgba(249,249,249,0.95); font-weight: 600; }
+    .persona-header { display: flex; align-items: center; gap: 18px; }
+    .persona-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      object-fit: cover; border: 2px solid rgba(244,63,94,0.3); flex-shrink: 0;
+    }
+    .persona-info { display: flex; flex-direction: column; gap: 4px; }
+    .persona-name { font-size: 18px; font-weight: 600; }
+    .persona-role { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); }
+    .persona-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 12px; }
+    .persona-text { font-size: 14px; font-weight: 300; color: rgba(249,249,249,0.7); line-height: 1.7; }
+    .pain-list { display: flex; flex-direction: column; gap: 8px; }
+    .pain-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; font-weight: 300; color: rgba(249,249,249,0.65); line-height: 1.6; }
+    .pain-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); flex-shrink: 0; margin-top: 7px; }
+
+    /* ─── VERSION BAND ─── */
+    .version-band {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(244,63,94,0.08), rgba(248,104,37,0.05));
+      border-top: 1px solid rgba(244,63,94,0.15);
+      border-bottom: 1px solid rgba(244,63,94,0.15);
+      display: flex; flex-direction: column; align-items: center;
+      padding: var(--space-md) 64px;
+    }
+    .version-inner {
+      width: 100%; max-width: 1100px;
+      display: flex; flex-direction: row; align-items: center;
+      gap: 48px;
+    }
+    .version-text {
+      flex: 1;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .version-tag {
+      font-size: 10px; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--orange);
+    }
+    .version-title {
+      font-size: clamp(26px, 3.2vw, 42px);
+      font-weight: 900; line-height: 1.1;
+    }
+    .version-desc {
+      font-size: 16px; font-weight: 300;
+      color: rgba(249,249,249,0.6); line-height: 1.8;
+      max-width: 680px;
+    }
+    .version-phone {
+      flex-shrink: 0;
+      width: 197px; height: 426px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 64px rgba(0,0,0,0.5);
+    }
+    .version-phone img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+      display: block;
+    }
+
+    /* ─── IMAGES ─── */
+    .img-full {
+      width: 100%; border-radius: var(--radius-md);
+      display: block; border: 1px solid var(--border);
+    }
+    .img-centered {
+      display: block; margin: 0 auto;
+      max-width: 640px; width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+    .two-col { display: flex; flex-direction: row; gap: var(--space-md); align-items: flex-start; }
+    .two-col > div { display: flex; flex-direction: column; gap: var(--space-xs); flex: 1; }
+    .three-col { display: flex; flex-direction: row; gap: var(--space-md); align-items: flex-start; }
+    .three-col > div { display: flex; flex-direction: column; gap: var(--space-xs); flex: 1; }
+    .screen-card {
+      width: 100%; height: 385px;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+    .screen-card img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block;
+    }
+    .img-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); }
+    .img-note { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; }
+    .screen-preview {
+      width: 100%; height: 385px;
+      overflow: hidden; border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .screen-preview img {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 150%;
+      object-fit: cover; object-position: top center;
+    }
+
+    /* ─── SCREENS MOSAIC ─── */
+    .screens-mosaic {
+      display: grid;
+      grid-template-columns: repeat(3, 300px);
+      column-gap: 16px;
+      row-gap: 16px;
+      align-items: start;
+    }
+    .screens-mosaic img {
+      width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 16px 64px rgba(0,0,0,0.5);
+      display: block;
+    }
+    .screens-mosaic .spacer { display: block; }
+    @media (max-width: 900px) {
+      .screens-mosaic { grid-template-columns: repeat(2, 1fr); column-gap: 16px; row-gap: 32px; }
+      .screens-mosaic img { width: 100%; }
+      .screens-mosaic .spacer { display: none; }
+    }
+
+    /* ─── SCREENS CAROUSEL ─── */
+    .screens-carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      width: 100%;
+    }
+    .carousel-track {
+      position: relative;
+      width: 340px;
+      flex-shrink: 0;
+    }
+    .carousel-slide {
+      width: 340px;
+      display: none;
+    }
+    .carousel-slide.active {
+      display: block;
+    }
+    .carousel-btn {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(244,63,94,0.3);
+      background: rgba(244,63,94,0.08);
+      color: var(--rose);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .carousel-btn:hover {
+      background: rgba(244,63,94,0.18);
+      border-color: rgba(244,63,94,0.6);
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+    .carousel-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transition: background 0.2s, width 0.2s;
+      cursor: pointer;
+    }
+    .carousel-dot.active {
+      background: var(--rose);
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    /* ─── REFLECTION BOX ─── */
+    .reflection-box {
+      background: rgba(244,63,94,0.06);
+      border: 1px solid rgba(244,63,94,0.15);
+      border-radius: var(--radius-md);
+      padding: 40px;
+      display: flex; flex-direction: column; gap: var(--space-sm);
+    }
+    .reflection-label {
+      font-size: 10px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--rose);
+    }
+
+    /* ─── DESIGN DECISIONS ─── */
+    .decisions-list { display: flex; flex-direction: column; gap: var(--space-md); }
+    .decision-card {
+      display: flex; flex-direction: row; gap: 60px; align-items: center;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 48px;
+      transition: border-color 0.3s;
+    }
+    .decision-card:hover { border-color: rgba(244,63,94,0.25); }
+    .decision-card.reverse { flex-direction: row-reverse; }
+    .decision-text { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .decision-img { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .decision-img img { width: 280px; border-radius: 20px; box-shadow: 0 20px 80px rgba(0,0,0,0.4); display: block; }
+    .decision-num { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); }
+    .decision-title { font-size: 28px; font-weight: 700; line-height: 1.2; }
+    .decision-title span {
+      background: linear-gradient(135deg, var(--orange), var(--rose));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .decision-body { font-size: 16px; font-weight: 300; color: rgba(249,249,249,0.65); line-height: 1.8; }
+
+    /* ─── TAKEAWAY ─── */
+    .takeaway {
+      width: 100%;
+      background: linear-gradient(170deg, #0a0a0a 0%, #1e0810 50%, #0a0a0a 100%);
+      display: flex; flex-direction: column; align-items: center;
+      padding: var(--space-xl) 64px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .takeaway::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(244,63,94,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .takeaway-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); max-width: 900px; }
+    .takeaway-title { font-size: clamp(32px, 4.5vw, 56px); font-weight: 900; line-height: 1.15; }
+    .takeaway-title span {
+      background: linear-gradient(135deg, #fff 20%, var(--orange) 60%, var(--rose) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .takeaway-body { font-size: 17px; font-weight: 300; color: rgba(249,249,249,0.55); line-height: 1.8; max-width: 680px; }
+
+    /* ─── CS-NEXT ─── */
+    .cs-next {
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1100px; margin: 0 auto;
+      padding: 60px 64px;
+      border-top: 1px solid var(--border);
+    }
+    .next-block { display: flex; flex-direction: column; gap: 8px; }
+    .next-block.right { align-items: flex-end; }
+    .next-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); }
+    .next-title { font-size: 24px; font-weight: 900; color: var(--text); text-decoration: none; transition: color 0.2s; }
+    .next-title:hover { color: var(--rose); }
+
+    /* ─── TYPOGRAPHY - PREVENT ORPHANS ─── */
+    .section-title, .hero-title, .version-title, .decision-title,
+    .takeaway-title, .hmw-text, .nav-name {
+      text-wrap: balance;
+    }
+    .body-text, .card-desc, .version-desc, .decision-body,
+    .persona-text, .takeaway-body, .img-note, .hero-subtitle {
+      text-wrap: pretty;
+    }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .hero-inner  { flex-direction: column; }
+      .hero-text   { flex: none; }
+      .two-col     { flex-direction: column; }
+      .three-col   { flex-direction: column; }
+      .personas-grid { flex-direction: column; }
+      .decision-card, .decision-card.reverse { flex-direction: column; }
+      .screens-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 720px) {
+      nav { padding: 16px 24px; }
+      .section-inner { padding: 60px 24px; }
+      .hmw-strip, .version-band { padding: 48px 24px; }
+      .cards-row { flex-direction: column; }
+      .screens-grid { grid-template-columns: 1fr; }
+      .cs-next { flex-direction: column; gap: 32px; padding: 40px 24px; }
+      .hero-image img { max-width: 200px; }
+      .hero-image { order: -1; }
+      .hero-text  { order: 1; }
+    }
+    .cs-footer-simple { border-top: 1px solid var(--border); padding: 32px 64px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; font-size: 13px; color: var(--muted); }
+    .cs-footer-simple .footer-name { font-weight: 600; color: var(--text); }
+    .contact-footer { background: #0a0a0a; padding: 120px 64px 0; text-align: center; }
+    .contact-footer-inner { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 36px; padding-bottom: 100px; }
+    .contact-eyebrow { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #ffcd38; font-weight: 400; }
+    .contact-heading { font-size: clamp(48px, 7vw, 80px); font-weight: 900; line-height: 1.0; color: #f9f9f9; margin: 0; }
+    .contact-heading-yellow { color: #ffcd38; }
+    .contact-body { font-size: 17px; font-weight: 300; color: #6b7280; line-height: 1.7; }
+    .contact-email-btn { display: inline-flex; align-items: center; gap: 16px; padding: 20px 48px; border: 1px solid rgba(255,205,56,0.4); border-radius: 100px; color: #f9f9f9; text-decoration: none; font-size: 15px; letter-spacing: 2px; font-weight: 300; transition: border-color 0.3s, background 0.3s; }
+    .contact-email-btn:hover { border-color: rgba(255,205,56,0.8); background: rgba(255,205,56,0.05); }
+    .contact-social { display: flex; gap: 32px; }
+    .contact-social a { font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #6b7280; text-decoration: none; font-weight: 300; transition: color 0.25s; }
+    .contact-social a:hover { color: #f9f9f9; }
+    .contact-footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding: 24px 64px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-name { font-size: 14px; font-weight: 600; color: #f9f9f9; }
+    .contact-footer-bottom span:last-child { font-size: 13px; color: #6b7280; }
+    @media (max-width: 720px) {
+      .contact-footer { padding: 80px 24px 0; }
+      .contact-footer-bottom { padding: 24px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="progress-bar"></div>
+
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="images/avatar-face.png" class="nav-avatar" alt="Ofir Saportas" />
+    <span class="nav-name">Ofir Saportas</span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+    Back to Portfolio
+  </a>
+</nav>
+
+<div class="page-wrapper">
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="tag">UX / UI · Web &amp; Mobile Project</p>
+        <h1 class="hero-title">
+          <span>Adopt A</span>
+          <span>Mentor</span>
+        </h1>
+        <p class="hero-subtitle">Connecting new adopters with experienced pet parents - so no one has to figure it out alone.</p>
+        <div class="meta-row">
+          <div class="meta-item"><div class="meta-label">Role</div><div class="meta-value">UX / UI Designer</div></div>
+          <div class="meta-item"><div class="meta-label">Type</div><div class="meta-value">Web → Mobile</div></div>
+<div class="meta-item"><div class="meta-label">Deliverable</div><div class="meta-value">Feature Design</div></div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="images/adopt/hero.png" alt="Adopt A Mentor" />
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── OVERVIEW ── -->
+  <section class="section reveal">
+    <div class="section-inner narrow">
+      <p class="section-label">Overview</p>
+      <p class="body-text" style="font-size: clamp(16px, 1.5vw, 20px); line-height: 1.8; max-width: 760px;">Adopting a pet for the first time is overwhelming. AdoptMe asked me to design a feature that connects new adopters with experienced mentors - so no one has to figure it out alone.</p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── THE PROBLEM ── -->
+  <section class="section reveal">
+    <div class="section-inner">
+      <p class="section-label">The Problem</p>
+      <h2 class="section-title">There's no one to ask.</h2>
+      <p class="body-text">Many adopters experience frustration and loneliness - because when something feels off, there's simply no one to ask.</p>
+      <div class="cards-row">
+        <div class="card">
+          <div class="card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="card-title">Information Gap</div>
+          <div class="card-desc">Questions too minor for a vet but too important to ignore - left completely unanswered.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="card-title">Emotional Overload</div>
+          <div class="card-desc">New adopters are overwhelmed and anxious - they need empathy, not just instructions.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="card-title">No Community</div>
+          <div class="card-desc">Experienced owners want to help - but there's no platform connecting them to those who need it.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HMW ── -->
+  <div class="hmw-strip reveal">
+    <p class="section-label">How Might We</p>
+    <p class="hmw-text">How might we give adopters <em>guidance, emotional support, and practical advice</em> from experienced pet owners?</p>
+  </div>
+
+  <!-- ── MAIN GOALS ── -->
+  <section class="section reveal">
+    <div class="section-inner">
+      <p class="section-label">Main Goals</p>
+      <h2 class="section-title">Give adopters a human guide - someone who's been there</h2>
+      <div class="cards-row">
+        <div class="card">
+          <div class="card-num">#1</div>
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="card-title">Create guidance for adopters</div>
+          <div class="card-desc">A clear, structured path with human support at every step.</div>
+        </div>
+        <div class="card">
+          <div class="card-num">#2</div>
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <div class="card-title">Reduce anxiety in early adoption</div>
+          <div class="card-desc">Reduce confusion and overwhelm in the critical first weeks.</div>
+        </div>
+        <div class="card">
+          <div class="card-num">#3</div>
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="card-title">Build community engagement</div>
+          <div class="card-desc">Connect experienced owners to those who need them - creating mutual value.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── PERSONAS ── -->
+  <section class="section reveal">
+    <div class="section-inner">
+      <p class="section-label">User Personas</p>
+      <h2 class="section-title">Two sides of the same connection</h2>
+      <p class="body-text">Two users with opposite relationships to the process - one is looking for help, one is offering it. That asymmetry shaped every design decision.</p>
+      <div class="personas-grid">
+        <div class="persona-card">
+          <div class="persona-header">
+            <img src="images/adopt/dana.png" class="persona-avatar" alt="Dana" />
+            <div class="persona-info">
+              <div class="persona-name">Dana Shimon</div>
+              <div class="persona-role">The New Adopter</div>
+            </div>
+          </div>
+          <p class="persona-label">Background</p>
+          <p class="persona-text">Adopting a dog for the first time. Excited but <strong>afraid of making the wrong call</strong> - insecure and overwhelmed.</p>
+          <p class="persona-label">Main Goal</p>
+          <p class="persona-text"><strong>Gain confidence</strong> and understand what to expect in the first weeks.</p>
+          <p class="persona-label">Pain Points</p>
+          <div class="pain-list">
+            <div class="pain-item"><div class="pain-dot"></div><span>Afraid of making mistakes with her new pet</span></div>
+            <div class="pain-item"><div class="pain-dot"></div><span><strong>Emotionally overloaded</strong>, hesitant to ask friends</span></div>
+            <div class="pain-item"><div class="pain-dot"></div><span>No <strong>trusted source</strong> for small but important questions</span></div>
+          </div>
+        </div>
+        <div class="persona-card">
+          <div class="persona-header">
+            <img src="images/adopt/ofek.png" class="persona-avatar" alt="Ofek" />
+            <div class="persona-info">
+              <div class="persona-name">Ofek Levy</div>
+              <div class="persona-role">The Mentor</div>
+            </div>
+          </div>
+          <p class="persona-label">Background</p>
+          <p class="persona-text">Has adopted several dogs over the years. Wants to help new adopters <strong>avoid common mistakes</strong>.</p>
+          <p class="persona-label">Main Goal</p>
+          <p class="persona-text">Make a <strong>meaningful impact</strong> by sharing his experience in a supportive, structured way.</p>
+          <p class="persona-label">Pain Points</p>
+          <div class="pain-list">
+            <div class="pain-item"><div class="pain-dot"></div><span>Limited time - needs a <strong>flexible, low-commitment</strong> way to help</span></div>
+            <div class="pain-item"><div class="pain-dot"></div><span>Difficulty setting clear boundaries with new people</span></div>
+            <div class="pain-item"><div class="pain-dot"></div><span>Concern that his help <strong>won't be truly valued</strong></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══════════════════════════════════════
+       V1
+  ══════════════════════════════════════ -->
+  <div class="version-band reveal">
+    <div class="version-inner">
+      <p class="version-tag">Version 01</p>
+      <h2 class="version-title">Location-based auto-matching &amp; web registration</h2>
+      <p class="version-desc">A web form for each user type. The system matches automatically by location alone - no profiles, no browsing, no choice.</p>
+    </div>
+  </div>
+
+  <section class="section reveal">
+    <div class="section-inner">
+      <p class="section-label">V1 - How it worked</p>
+      <h2 class="section-title">The brief, executed simply</h2>
+      <p class="body-text">Following the company's brief, I designed a straightforward registration flow - a form for each user type, with the system automatically matching adopters to mentors based on location only. The mentor would then review the request and approve or decline it.</p>
+      <img src="images/adopt/new flow.png" alt="V1 Registration Flow" class="img-full" />
+      <div style="display:flex;flex-direction:row;gap:20px;align-items:flex-start;margin-top:8px;">
+        <div style="flex:376;display:flex;flex-direction:column;gap:12px;">
+          <div class="img-label">Landing Page</div>
+          <img src="images/adopt/landing.png" alt="Landing Page" style="width:100%;height:auto;display:block;border-radius:var(--radius-md);border:1px solid var(--border);" />
+          <p class="img-note">User selection flow that directs mentors and adopters through the relevant registration process.</p>
+        </div>
+        <div style="flex:387;display:flex;flex-direction:column;gap:12px;">
+          <div class="img-label">New Adopter Registration</div>
+          <img src="images/adopt/registration.png" alt="V1 Registration" style="width:100%;height:auto;display:block;border-radius:var(--radius-md);border:1px solid var(--border);" />
+          <p class="img-note">Form collects key pet details - type, age, size - to understand the adopter's situation.</p>
+        </div>
+        <div style="flex:292;display:flex;flex-direction:column;gap:12px;">
+          <div class="img-label">Mentor Match Proposal</div>
+          <img src="images/adopt/match.png" alt="V1 Match" style="width:100%;height:auto;display:block;border-radius:var(--radius-md);border:1px solid var(--border);" />
+          <p class="img-note">Mentor receives adopter's profile and can accept the match - then receives their WhatsApp contact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── REFLECTION ── -->
+  <section class="section reveal">
+    <div class="section-inner">
+      <p class="section-label">Design Reflection</p>
+      <h2 class="section-title">What V1 taught me</h2>
+      <div class="reflection-box">
+        <p class="reflection-label">Key Insight</p>
+        <p class="body-text">Long web forms create friction - but the bigger problem was the matching logic. Location alone can't determine a good mentor relationship. It ignores availability, experience, breed, and personality - everything that actually matters.</p>
+        <p class="body-text">The redesign focused on two things: <strong style="color:var(--text)">making registration feel effortless</strong>, and <strong style="color:var(--text)">replacing the algorithm with a community pool - so both sides get to choose</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══════════════════════════════════════
+       V2
+  ══════════════════════════════════════ -->
+  <div class="version-band reveal">
+    <div class="version-inner">
+      <p class="version-tag">Version 02</p>
+      <h2 class="version-title">Mobile-first, visual registration &amp; a mentor pool to choose from</h2>
+      <p class="version-desc">A complete rethink - mobile app, visual onboarding, and a community feed that replaces the algorithm. Users browse real mentor profiles and both sides choose the connection.</p>
+    </div>
+  </div>
+
+  <!-- ── DESIGN DECISIONS ── -->
+  <section class="section reveal">
+    <div class="section-inner">
+      <p class="section-label">Design Decisions</p>
+      <h2 class="section-title">Every change, explained</h2>
+      <div class="decisions-list">
+        <div class="decision-card">
+          <div class="decision-text">
+            <div class="decision-num">Decision 01</div>
+            <h3 class="decision-title"><span>Reducing</span> open text fields</h3>
+            <p class="decision-body">Open text fields were kept only where free input is truly necessary - everything else was replaced with visual tiles and selectors. Less typing, fewer drop-offs, same information collected.</p>
+          </div>
+          <div class="decision-img">
+            <video src="images/adopt/decision-1.mp4" autoplay loop muted playsinline style="width:280px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
+          </div>
+        </div>
+        <div class="decision-card reverse">
+          <div class="decision-text">
+            <div class="decision-num">Decision 02</div>
+            <h3 class="decision-title">From form to <span>guided flow</span></h3>
+            <p class="decision-body">Registration was rebuilt as a visual, choice-based experience - selection tiles and guided steps replace open text fields. Users tap through focused choices instead of filling a form, making it easier to complete while still collecting everything we need.</p>
+          </div>
+          <div class="decision-img">
+            <video src="images/adopt/decision-2.mp4" autoplay loop muted playsinline style="width:280px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
+          </div>
+        </div>
+        <div class="decision-card">
+          <div class="decision-text">
+            <div class="decision-num">Decision 03</div>
+            <h3 class="decision-title">One step at a time, <span>not one long form</span></h3>
+            <p class="decision-body">The registration was split into focused steps - each screen asks for one thing at a time. Users never see the full length upfront, which reduces overwhelm and keeps them moving forward. Smaller steps feel easier to complete, and easier to come back to.</p>
+          </div>
+          <div class="decision-img">
+            <video src="images/adopt/decision-3.mp4" autoplay loop muted playsinline style="width:280px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── KEY SCREENS ── -->
+  <section class="section reveal" style="background:#000;">
+    <div class="section-inner" style="align-items:flex-start;">
+      <p class="section-label">Key Screens</p>
+      <h2 class="section-title">The full V2 flow</h2>
+      <p class="body-text">Each step is a separate screen - keeps users focused and reduces drop-off at every stage of the registration journey.</p>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;">
+        <div class="screens-carousel">
+          <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)" aria-label="Previous">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="carousel-track">
+            <img src="images/adopt/1.png" class="carousel-slide active" alt="Screen 1" />
+            <img src="images/adopt/2.png" class="carousel-slide" alt="Screen 2" />
+            <img src="images/adopt/3.png" class="carousel-slide" alt="Screen 3" />
+            <img src="images/adopt/4.png" class="carousel-slide" alt="Screen 4" />
+            <img src="images/adopt/5.png" class="carousel-slide" alt="Screen 5" />
+            <img src="images/adopt/6.png" class="carousel-slide" alt="Screen 6" />
+            <img src="images/adopt/7.png" class="carousel-slide" alt="Screen 7" />
+            <img src="images/adopt/8.png" class="carousel-slide" alt="Screen 8" />
+            <img src="images/adopt/9.png" class="carousel-slide" alt="Screen 9" />
+          </div>
+          <button class="carousel-btn carousel-next" onclick="moveCarousel(1)" aria-label="Next">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TAKEAWAY ── -->
+  <div class="takeaway reveal">
+    <div class="takeaway-inner">
+      <p class="section-label">Reflection</p>
+      <h2 class="takeaway-title">I started with the interface. <span>The problem was deeper.</span></h2>
+      <p class="takeaway-body">At first, I focused mostly on the interface itself - improving the layout, simplifying the registration flow, and making the experience feel cleaner and more organized.</p>
+      <p class="takeaway-body" style="margin-top:12px;">But over time, I realized the bigger challenge wasn't only the UI. Today, people lose patience quickly with long and exhausting forms - especially in emotional or personal processes like this one.</p>
+      <p class="takeaway-body" style="margin-top:12px;">That realization pushed me to rethink the registration experience entirely - making it feel lighter, more human, and less overwhelming.</p>
+    </div>
+  </div>
+
+  <!-- ── NEXT ── -->
+  <div style="width:100%; display:flex; justify-content:center;">
+    <div class="cs-next">
+      <div class="next-block">
+        <p class="next-label">Back to Portfolio</p>
+        <a href="index.html" class="next-title">← All Projects</a>
+      </div>
+      <div class="next-block right">
+        <p class="next-label">Next Project</p>
+        <a href="memore.html" class="next-title">Memore →</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page-wrapper -->
+
+<script>
+  // Carousel
+  let carouselIndex = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dotsContainer = document.getElementById('carouselDots');
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goToSlide(n) {
+    slides[carouselIndex].classList.remove('active');
+    dotsContainer.children[carouselIndex].classList.remove('active');
+    carouselIndex = (n + slides.length) % slides.length;
+    slides[carouselIndex].classList.add('active');
+    dotsContainer.children[carouselIndex].classList.add('active');
+  }
+
+  function moveCarousel(dir) { goToSlide(carouselIndex + dir); }
+
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursor-ring');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+    ring.style.left   = e.clientX + 'px'; ring.style.top   = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.width='52px'; ring.style.height='52px'; });
+    el.addEventListener('mouseleave', () => { ring.style.width='36px'; ring.style.height='36px'; });
+  });
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+  <footer class="cs-footer-simple">
+    <span class="footer-name">Ofir Saportas</span>
+    <span>All rights reserved © 2026</span>
+  </footer>
+
+  <script src="/mobile-popup.js"></script>
+</body>
+</html>

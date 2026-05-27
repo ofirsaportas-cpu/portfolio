@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEMORE -Case Study · Ofir Saportas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <script>
+    if (window.location.hash.includes('figmacapture')) {
+      document.addEventListener('DOMContentLoaded', function() {
+        var s = document.createElement('style');
+        s.textContent = '.reveal { opacity: 1 !important; transform: none !important; transition: none !important; }';
+        document.head.appendChild(s);
+        document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
+      });
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #242424;
+      --accent: #9A4673;
+      --deep:   #751B41;
+      --pink:   #9A4673;
+      --text: #f9f9f9;
+      --muted: #6b7280;
+      --card-bg: #111111;
+      --border: rgba(255,255,255,0.07);
+      --accent-light: rgba(154,70,115,0.15);
+      --deep-mid:     rgba(117,27,65,0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── CURSOR ─── */
+    #cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s, width 0.2s, height 0.2s;
+    }
+    #cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid rgba(154,70,115,0.5); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.12s ease, width 0.2s, height 0.2s;
+    }
+    a, button { cursor: none; }
+
+    /* ─── PROGRESS BAR ─── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; z-index: 200;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--deep));
+      transition: width 0.1s linear;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none;
+    }
+    .nav-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      object-fit: cover; object-position: 50% 20%;
+      border: 2px solid var(--accent);
+      mix-blend-mode: multiply; background: var(--bg);
+    }
+    .nav-name { font-size: 20px; font-weight: 700; color: var(--text); }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 300; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--accent); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-4px); }
+
+    /* ─── HERO ─── */
+    .cs-hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      background: linear-gradient(170deg, #0a0a0a 41.7%, #420824 66.6%, #9a4673 91.5%);
+    }
+    .cs-hero-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(100px); pointer-events: none;
+    }
+    .cs-hero-orb-1 {
+      width: 600px; height: 600px;
+      background: #8a0e51;
+      top: -100px; right: -100px;
+    }
+    .cs-hero-orb-2 {
+      width: 400px; height: 400px;
+      background: rgba(167,139,250,0.1);
+      bottom: 0; left: 200px;
+    }
+    .cs-hero-inner {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 1200px; margin: 0 auto;
+      padding: 0 64px;
+      display: flex; align-items: center;
+      gap: 40px;
+    }
+    .cs-hero-text { flex: 0 0 520px; }
+    .cs-hero-phones {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cs-hero-cover {
+      max-width: 230px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+    @media (max-width: 1024px) {
+      .cs-hero-inner { flex-direction: column; padding-top: 120px; padding-bottom: 60px; }
+      .cs-hero-text { flex: none; }
+      .cs-hero-cover { max-width: 180px; }
+      .cs-hero-phones { order: -1; }
+      .cs-hero-text   { order: 1; }
+    }
+    .cs-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 300; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 24px;
+    }
+    .cs-hero-title {
+      font-size: clamp(48px, 7vw, 90px);
+      font-weight: 900; line-height: 0.95;
+      text-transform: uppercase; letter-spacing: 6px;
+      margin-bottom: 24px; text-align: left;
+    }
+    .cs-hero-title span {
+      display: block;
+      background: linear-gradient(135deg, #fff 30%, var(--deep) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cs-hero-subtitle {
+      font-size: clamp(15px, 1.6vw, 19px);
+      font-weight: 300; color: rgba(249,249,249,0.6);
+      line-height: 1.6; letter-spacing: 0.5px;
+      max-width: 640px; margin-bottom: 36px;
+      text-align: left;
+    }
+    .cs-meta-row {
+      display: flex; flex-wrap: wrap; gap: 36px;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+    }
+    .cs-meta-item {}
+    .cs-meta-label {
+      font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .cs-meta-value {
+      font-size: 14px; font-weight: 600; color: var(--text);
+    }
+
+    /* ─── COVER IMAGE ─── */
+    .cs-cover {
+      width: 100%; max-height: 600px; overflow: hidden;
+      position: relative;
+    }
+    .cs-cover-inner {
+      width: 100%; height: 600px;
+      background: linear-gradient(135deg, #1a0033 0%, #2e1065 50%, #4c1d95 100%);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .cs-cover-img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .cs-cover-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%);
+    }
+    .cs-cover-mockup {
+      position: relative; z-index: 2;
+      display: flex; gap: 24px; align-items: flex-end;
+    }
+    .cs-phone {
+      width: 220px; height: 440px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(154,70,115,0.3);
+      border-radius: 28px; overflow: hidden;
+      position: relative; box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+    }
+    .cs-phone.small {
+      width: 180px; height: 360px;
+      opacity: 0.7; margin-bottom: 30px;
+    }
+    .cs-phone-bar {
+      height: 8px; background: rgba(255,255,255,0.05);
+      margin: 18px auto 12px; width: 80px;
+      border-radius: 4px;
+    }
+    .cs-phone-screen {
+      padding: 12px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .cs-phone-header {
+      height: 40px; background: rgba(154,70,115,0.15);
+      border-radius: 10px; border: 1px solid rgba(154,70,115,0.2);
+    }
+    .cs-phone-card {
+      height: 80px; background: rgba(255,255,255,0.04);
+      border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);
+    }
+    .cs-phone-card.accent { background: rgba(117,27,65,0.2); border-color: rgba(154,70,115,0.2); }
+    .cs-phone-line { height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; width: 70%; }
+    .cs-phone-line.short { width: 45%; }
+
+    /* ─── CONTENT SECTIONS ─── */
+    .cs-section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 100px 64px;
+    }
+    .cs-section-label {
+      font-size: 10px; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 16px;
+    }
+    .cs-section-title {
+      font-size: clamp(40px, 4.5vw, 56px);
+      font-weight: 900; line-height: 1.1;
+      margin-bottom: 32px; text-wrap: balance;
+    }
+    .cs-body {
+      font-size: 17px; font-weight: 300;
+      color: rgba(249,249,249,0.72);
+      line-height: 1.9; max-width: 720px;
+      text-wrap: pretty;
+    }
+    .cs-body + .cs-body { margin-top: 24px; }
+
+    /* ─── DIVIDER ─── */
+    .cs-divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ─── STATS ROW ─── */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      margin-top: 60px;
+    }
+    .stat-item {
+      background: var(--card-bg);
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 52px; font-weight: 900;
+      color: var(--accent); line-height: 1;
+      margin-bottom: 10px;
+    }
+    .stat-label {
+      font-size: 12px; font-weight: 300;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── QUOTE BLOCK ─── */
+    .cs-quote {
+      border-left: 3px solid var(--pink);
+      padding: 8px 0 8px 32px;
+      margin: 48px 0;
+    }
+    .cs-quote-text {
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 300; line-height: 1.5;
+      color: var(--text); font-style: italic;
+      letter-spacing: 0.3px;
+    }
+    .cs-quote-attr {
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(249,249,249,0.45);
+      letter-spacing: 0.5px;
+      font-style: normal;
+    }
+
+    /* ─── INSIGHT CARDS ─── */
+    .insights-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; margin-top: 48px;
+    }
+    .insight-card {
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .insight-card:hover {
+      border-color: rgba(154,70,115,0.3);
+      background: rgba(109,40,217,0.05);
+    }
+    .insight-num {
+      font-size: 40px; font-weight: 900;
+      color: rgba(154,70,115,0.3);
+      line-height: 1; margin-bottom: 16px;
+    }
+    .insight-title {
+      font-size: 15px; font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .insight-body {
+      font-size: 14px; font-weight: 300;
+      color: var(--muted); line-height: 1.7;
+    }
+
+    /* ─── SURVEY DATA CHARTS ─── */
+    .survey-block { margin-top: 64px; }
+    .survey-two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .chart-card {
+      padding: 36px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.02);
+    }
+    .chart-eyebrow {
+      font-size: 10px; letter-spacing: 3.5px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .chart-heading {
+      font-size: 17px; font-weight: 700;
+      line-height: 1.3; margin-bottom: 4px;
+    }
+    .chart-n {
+      font-size: 12px; font-weight: 300; color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    /* Donut */
+    .donut-wrap {
+      display: flex; align-items: center; gap: 32px;
+    }
+    .donut-svg-wrap { position: relative; flex-shrink: 0; }
+    .donut-center-label {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .donut-big-num {
+      font-size: 30px; font-weight: 900; line-height: 1;
+      color: var(--text);
+    }
+    .donut-big-sub {
+      font-size: 10px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: 4px;
+    }
+    .donut-legend { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .legend-row { display: flex; align-items: center; gap: 10px; }
+    .legend-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+    .legend-name {
+      font-size: 13px; font-weight: 300;
+      color: rgba(249,249,249,0.75); flex: 1;
+    }
+    .legend-pct {
+      font-size: 13px; font-weight: 700; color: var(--text);
+    }
+
+    /* Circle segments -animated via stroke-dashoffset */
+    .donut-seg {
+      transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);
+      transform-origin: center;
+      transform: rotate(-90deg);
+    }
+
+    /* Horizontal icon bars */
+    .icon-bar-list { display: flex; flex-direction: column; gap: 16px; }
+    .icon-bar-item {
+      display: grid;
+      grid-template-columns: 28px 1fr 44px;
+      align-items: center; gap: 12px;
+    }
+    .icon-bar-emoji { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
+    .icon-bar-emoji svg { width: 18px; height: 18px; }
+    .icon-bar-track {
+      height: 10px; border-radius: 5px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .icon-bar-fill {
+      height: 100%; border-radius: 5px;
+      background: linear-gradient(90deg, var(--deep), var(--accent));
+      width: 0%;
+      transition: width 1.1s cubic-bezier(0.4,0,0.2,1);
+    }
+    .icon-bar-fill.animate { width: var(--w); }
+    .icon-bar-label {
+      font-size: 11px; font-weight: 300; color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .icon-bar-pct {
+      font-size: 14px; font-weight: 700; color: var(--accent);
+      text-align: right;
+    }
+    .icon-bar-inner { display: flex; flex-direction: column; gap: 4px; }
+
+    /* Findings strip */
+    .survey-findings {
+      margin-top: 28px;
+      border: 1px solid rgba(154,70,115,0.15);
+      border-radius: 16px;
+      background: rgba(154,70,115,0.03);
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 0;
+    }
+    .finding-row {
+      display: flex; flex-direction: column; gap: 16px;
+      padding: 32px 36px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .finding-row:last-child { border-right: none; }
+    .finding-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(154,70,115,0.1);
+      border: 1px solid rgba(154,70,115,0.2);
+      border-radius: 11px;
+    }
+    .finding-icon svg { width: 22px; height: 22px; }
+    .finding-text {
+      font-size: 14px; font-weight: 300;
+      color: rgba(249,249,249,0.65); line-height: 1.8;
+    }
+    .finding-text strong { color: var(--accent); font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .survey-two-col { grid-template-columns: 1fr; }
+      .survey-findings { grid-template-columns: 1fr; }
+      .donut-wrap { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ─── CORE INSIGHT ─── */
+    .core-insight {
+      margin-top: 60px;
+      padding: 48px 56px;
+      border: 1px solid rgba(154,70,115,0.25);
+      border-radius: 20px;
+      background: rgba(117,27,65,0.08);
+      text-align: center;
+    }
+    .core-insight-eyebrow {
+      font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 20px;
+    }
+    .core-insight-text {
+      font-size: clamp(16px, 1.8vw, 22px);
+      font-weight: 600; line-height: 1.6;
+      color: var(--text); max-width: 780px; margin: 0 auto;
+    }
+    .insight-points {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      align-items: stretch;
+      gap: 0; margin-top: 56px;
+    }
+    .insight-point {
+      padding: 32px 28px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex; flex-direction: column;
+    }
+    .insight-point:first-child { padding-left: 0; }
+    .insight-point:last-child { border-right: none; padding-right: 0; }
+    .insight-point-icon {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); margin-bottom: 16px;
+    }
+    .insight-point-icon svg { width: 26px; height: 26px; }
+    .insight-point-num {
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px; font-weight: 600;
+    }
+    .insight-point-title {
+      font-size: 14px; font-weight: 700;
+      margin-bottom: 12px; line-height: 1.3;
+      text-wrap: balance;
+    }
+    .insight-point-desc {
+      font-size: 13px; font-weight: 300;
+      color: rgba(249,249,249,0.6); line-height: 1.75;
+      text-wrap: balance;
+    }
+    @media (max-width: 900px) {
+      .insight-points { grid-template-columns: 1fr; }
+      .insight-point { padding: 24px 0; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .insight-point:last-child { border-bottom: none; }
+    }
+
+    /* ─── COMPETITIVE TABLE ─── */
+    .comp-table {
+      width: 100%; margin-top: 48px;
+      border-collapse: collapse;
+      border-radius: 12px; overflow: hidden;
+    }
+    .comp-table th, .comp-table td {
+      padding: 18px 24px;
+      text-align: left; border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .comp-table th {
+      font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+      background: rgba(255,255,255,0.02);
+      font-weight: 300;
+    }
+    .comp-table td:first-child { font-weight: 600; color: var(--text); }
+    .comp-table td { font-weight: 300; color: rgba(249,249,249,0.65); }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table tr:hover td { background: rgba(109,40,217,0.04); }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px; border-radius: 100px;
+      font-size: 11px; font-weight: 300; letter-spacing: 1px;
+    }
+    .badge-gap { background: rgba(239,68,68,0.15); color: #f87171; }
+    .badge-ok { background: rgba(52,211,153,0.15); color: #6ee7b7; }
+    .badge-partial { background: rgba(251,191,36,0.15); color: #fcd34d; }
+
+    /* ─── PERSONAS ─── */
+    .personas-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; margin-top: 48px;
+      position: relative;
+    }
+    .personas-grid::after {
+      content: '';
+      position: absolute; top: 10%; bottom: 10%;
+      left: 50%; transform: translateX(-50%);
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(154,70,115,0.3) 30%, rgba(154,70,115,0.3) 70%, transparent);
+    }
+    .persona-card {
+      padding: 44px;
+      border: 1px solid rgba(154,70,115,0.18);
+      border-radius: 16px;
+      background: rgba(117,27,65,0.05);
+      position: relative; overflow: hidden;
+    }
+    .persona-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, #751B41, #9a4673);
+    }
+    .persona-card.secondary {
+      background: rgba(154,70,115,0.07);
+    }
+    .persona-card.secondary::before {
+      background: linear-gradient(90deg, #9a4673, #ec4899);
+    }
+    .persona-text strong { color: #ffffff; font-weight: 700; }
+    .persona-avatar-wrap {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, #2e1065, #4c1d95);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 20px;
+      border: 1px solid rgba(154,70,115,0.3);
+    }
+    .persona-name {
+      font-size: 20px; font-weight: 700; margin-bottom: 4px;
+    }
+    .persona-role {
+      font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .persona-section-label {
+      font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 8px; margin-top: 20px;
+    }
+    .persona-text {
+      font-size: 14px; font-weight: 300;
+      color: rgba(249,249,249,0.65); line-height: 1.7;
+    }
+    .persona-pain {
+      display: flex; gap: 10px; align-items: flex-start;
+      margin-top: 8px;
+    }
+    .persona-pain-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #f87171; flex-shrink: 0; margin-top: 6px;
+    }
+
+    /* ─── UI RESEARCH ─── */
+    .ui-research-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 48px; margin-top: 60px; align-items: start;
+    }
+    .ui-research-item {
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+    }
+    .ui-research-logo {
+      height: 48px; display: flex; align-items: center; justify-content: center;
+    }
+    .ui-research-logo img {
+      max-height: 100%; max-width: 150px; object-fit: contain;
+      mix-blend-mode: lighten; opacity: 0.9;
+    }
+    .ui-research-phone-wrap {
+      position: relative; width: 100%; max-width: 240px;
+    }
+    .ui-research-phone-wrap img {
+      width: 100%; display: block; border-radius: 12px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.65);
+    }
+    .ui-research-highlight {
+      position: absolute;
+      border: 3px solid #e056a0;
+      border-radius: 8px;
+      pointer-events: none;
+      background: rgba(224,86,160,0.1);
+      box-shadow:
+        0 0 0 3px rgba(224,86,160,0.45),
+        0 0 18px 4px rgba(224,86,160,0.55),
+        0 0 40px 8px rgba(224,86,160,0.2),
+        inset 0 0 12px rgba(224,86,160,0.15);
+    }
+    .ui-research-label {
+      display: flex; align-items: flex-start; gap: 10px;
+      width: 100%; max-width: 240px;
+    }
+    .ui-research-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 5px;
+    }
+    .ui-research-label-text {
+      font-size: 13px; font-weight: 300;
+      color: rgba(249,249,249,0.75); line-height: 1.6;
+    }
+    @media (max-width: 900px) {
+      .ui-research-grid { grid-template-columns: 1fr; }
+      .ui-research-phone-wrap, .ui-research-label { max-width: 100%; }
+    }
+
+    /* ─── FEATURES ─── */
+    .features-list {
+      display: flex; flex-direction: column; gap: 80px;
+      margin-top: 60px;
+    }
+    .feature-item {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .feature-item.reverse { direction: rtl; }
+    .feature-item.reverse > * { direction: ltr; }
+    .feature-num {
+      font-size: 80px; font-weight: 900;
+      color: rgba(154,70,115,0.12);
+      line-height: 1; margin-bottom: -16px;
+    }
+    .feature-tag {
+      font-size: 10px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .feature-title {
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 700; margin-bottom: 16px;
+    }
+    .feature-desc {
+      font-size: 15px; font-weight: 300;
+      color: rgba(249,249,249,0.65); line-height: 1.8;
+      margin-bottom: 24px; text-wrap: balance;
+    }
+    .feature-bullets {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .feature-bullet {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 300;
+      color: rgba(249,249,249,0.65);
+    }
+    .feature-bullet-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #a78bfa; flex-shrink: 0;
+    }
+    .feature-visual {
+      display: flex; align-items: flex-start; justify-content: center;
+      position: relative; padding: 0; min-height: 520px;
+      background: none; border: none; overflow: visible;
+    }
+    .feature-visual-glow {
+      position: absolute; inset: -60px;
+      background: radial-gradient(circle at 50% 40%, rgba(117,27,65,0.18) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+    .feature-screen {
+      border-radius: 28px; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.3);
+      position: relative; z-index: 1; flex-shrink: 0;
+    }
+    .feature-screen img {
+      max-height: 560px; width: auto; display: block;
+    }
+    .feature-visual-dual {
+      gap: 16px; align-items: flex-start;
+    }
+    .feature-visual-dual .feature-screen img {
+      max-height: 500px;
+    }
+    .feature-visual-dual .feature-screen:last-child {
+      margin-top: 44px;
+    }
+
+    /* ─── HMW STRIP ─── */
+    .hmw-strip {
+      width: 100%;
+      background: linear-gradient(135deg, #0d0814 0%, #2a0d20 55%, #0d0814 100%);
+      border-top: 1px solid rgba(154,70,115,0.2);
+      border-bottom: 1px solid rgba(154,70,115,0.2);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 80px 64px;
+      gap: 20px;
+      text-align: center;
+    }
+    .hmw-strip-label {
+      font-size: 10px; letter-spacing: 5px;
+      text-transform: uppercase; color: rgba(154,70,115,0.7);
+    }
+    .hmw-strip-text {
+      font-size: clamp(20px, 2.8vw, 32px); font-weight: 600;
+      line-height: 1.55; max-width: 820px; color: var(--text);
+    }
+    .hmw-strip-text em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    /* ─── HMW BOX ─── */
+    .hmw-box {
+      border: 1px solid rgba(154,70,115,0.25);
+      border-radius: 16px;
+      padding: 48px;
+      background: rgba(154,70,115,0.03);
+      margin: 48px 0;
+      position: relative;
+    }
+    .hmw-box::before {
+      content: '"';
+      position: absolute; top: 24px; left: 40px;
+      font-size: 80px; font-weight: 900; line-height: 1;
+      color: rgba(154,70,115,0.35);
+    }
+    .hmw-label {
+      font-size: 10px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 20px;
+    }
+    .hmw-text {
+      font-size: clamp(18px, 2vw, 26px);
+      font-weight: 600; line-height: 1.5;
+      color: var(--text);
+    }
+
+    /* ─── GAPS GRID ─── */
+    .gaps-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; margin-top: 48px;
+    }
+    .gap-card {
+      padding: 32px;
+      border-radius: 12px;
+      background: rgba(117,27,65,0.05);
+      border: 1px solid rgba(154,70,115,0.2);
+    }
+    .gap-icon {
+      width: 36px; height: 36px;
+      margin-bottom: 20px;
+      display: block;
+      color: var(--pink);
+    }
+    .gap-icon svg { width: 100%; height: 100%; }
+    .gap-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+    .gap-desc {
+      font-size: 13px; font-weight: 300;
+      color: var(--muted); line-height: 1.7;
+      text-wrap: balance;
+    }
+
+    /* ─── SOLUTION PILLARS ─── */
+    .pillars-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: 1fr 1fr;
+      gap: 24px; margin-top: 48px;
+    }
+    .pillar {
+      padding: 52px 44px;
+      border: 1px solid rgba(154,70,115,0.2);
+      border-radius: 20px;
+      background: rgba(117,27,65,0.06);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      transition: border-color 0.3s, background 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .pillar::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--deep), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .pillar:hover { border-color: rgba(154,70,115,0.45); background: rgba(117,27,65,0.1); }
+    .pillar:hover::after { opacity: 1; }
+    .pillar-icon {
+      width: 60px; height: 60px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      background: rgba(154,70,115,0.1);
+      border: 1px solid rgba(154,70,115,0.25);
+      border-radius: 16px;
+      margin-bottom: 28px;
+    }
+    .pillar-icon svg { width: 28px; height: 28px; }
+    .pillar-title { font-size: 17px; font-weight: 700; margin-bottom: 12px; }
+    .pillar-desc {
+      font-size: 14px; font-weight: 300;
+      color: rgba(249,249,249,0.6); line-height: 1.75;
+      max-width: 320px; text-wrap: balance;
+    }
+
+    /* ─── MEMORE COVER BAND ─── */
+    .memore-band {
+      position: relative;
+      width: 100%;
+      height: 702px;
+      background: linear-gradient(108.73deg, #410924 0%, #2f0d30 38.8%, #772e55 90.6%);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .memore-band-text {
+      position: absolute;
+      font-size: 300px; font-weight: 900;
+      letter-spacing: 6px; text-transform: uppercase;
+      color: transparent;
+      background: linear-gradient(90deg, #f9f9f9 0%, #f9f9f9 100%);
+      -webkit-background-clip: text; background-clip: text;
+      opacity: 0.2;
+      white-space: nowrap;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none; user-select: none;
+      line-height: 1;
+    }
+    .memore-band-phones {
+      position: relative; z-index: 2;
+      display: flex; gap: 20px; align-items: flex-start;
+    }
+    .memore-band-phone {
+      width: 290px; height: 598px;
+      object-fit: cover; object-position: top; border-radius: 0;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .memore-band { height: auto; padding: 60px 24px; }
+      .memore-band-text { font-size: 120px; }
+      .memore-band-phone { width: 44%; height: auto; }
+    }
+
+    /* ─── KEY TAKEAWAY ─── */
+    .takeaway {
+      text-align: center;
+      padding: 100px 64px;
+      background: linear-gradient(160deg, #0a0a0a 30%, #120a22 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .takeaway-label {
+      font-size: 10px; letter-spacing: 5px;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 32px;
+    }
+    .takeaway-text {
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 700; line-height: 1.2;
+      max-width: 800px; margin: 0 auto 32px;
+    }
+    .takeaway-text span {
+      background: linear-gradient(135deg, #fff 30%, var(--deep) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .takeaway-body {
+      font-size: 16px; font-weight: 300;
+      color: rgba(249,249,249,0.6); line-height: 1.8;
+      max-width: 600px; margin: 0 auto;
+    }
+
+    /* ─── NEXT PROJECT ─── */
+    .next-project {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 80px 64px;
+      max-width: 1100px; margin: 0 auto;
+      text-decoration: none; color: var(--text);
+      border-top: 1px solid var(--border);
+      transition: opacity 0.2s;
+    }
+    .next-project:hover { opacity: 0.8; }
+    .next-label {
+      font-size: 11px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .next-title {
+      font-size: clamp(16px, 1.8vw, 22px);
+      font-weight: 700; line-height: 1;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: #f9f9f9; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .next-title:hover { opacity: 0.6; }
+    .next-arrow {
+      width: 80px; height: 80px; border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: border-color 0.2s, background 0.2s;
+    }
+    .next-project:hover .next-arrow {
+      border-color: var(--accent);
+      background: rgba(255,205,56,0.05);
+    }
+
+    /* ─── FOOTER ─── */
+    .cs-footer-simple { border-top: 1px solid var(--border); padding: 32px 64px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; font-size: 13px; color: var(--muted); }
+    .cs-footer-simple .footer-name { font-weight: 600; color: var(--text); }
+    .contact-footer { background: #0a0a0a; padding: 120px 64px 0; text-align: center; }
+    .contact-footer-inner { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 36px; padding-bottom: 100px; }
+    .contact-eyebrow { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #ffcd38; font-weight: 400; }
+    .contact-heading { font-size: clamp(48px, 7vw, 80px); font-weight: 900; line-height: 1.0; color: #f9f9f9; margin: 0; }
+    .contact-heading-yellow { color: #ffcd38; }
+    .contact-body { font-size: 17px; font-weight: 300; color: #6b7280; line-height: 1.7; }
+    .contact-email-btn { display: inline-flex; align-items: center; gap: 16px; padding: 20px 48px; border: 1px solid rgba(255,205,56,0.4); border-radius: 100px; color: #f9f9f9; text-decoration: none; font-size: 15px; letter-spacing: 2px; font-weight: 300; transition: border-color 0.3s, background 0.3s; }
+    .contact-email-btn:hover { border-color: rgba(255,205,56,0.8); background: rgba(255,205,56,0.05); }
+    .contact-social { display: flex; gap: 32px; }
+    .contact-social a { font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #6b7280; text-decoration: none; font-weight: 300; transition: color 0.25s; }
+    .contact-social a:hover { color: #f9f9f9; }
+    .contact-footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding: 24px 64px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-name { font-size: 14px; font-weight: 600; color: #f9f9f9; }
+
+    /* ─── ANIMATIONS ─── */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── LONG STORY SHORT ─── */
+    .lss {
+      width: 100%;
+      background: #0d0d0d;
+      border-bottom: 1px solid var(--border);
+    }
+    .lss-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 100px 64px;
+      display: grid; grid-template-columns: 1fr 420px;
+      gap: 80px; align-items: center;
+    }
+    .lss-eyebrow {
+      font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .lss-headline {
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 900; line-height: 1.1;
+      text-transform: uppercase; letter-spacing: 3px;
+      margin-bottom: 40px;
+      white-space: nowrap;
+    }
+    .lss-headline span {
+      background: linear-gradient(135deg, #fff 30%, var(--deep) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .lss-cards {
+      display: flex; flex-direction: column; gap: 16px;
+      margin-bottom: 40px;
+    }
+    .lss-card {
+      padding: 20px 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      display: flex; flex-direction: column; gap: 10px;
+      transition: border-color 0.3s;
+    }
+    .lss-card:hover { border-color: rgba(154,70,115,0.35); }
+    .lss-card-header {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .lss-card-icon {
+      width: 28px; height: 28px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(154,70,115,0.3);
+      border-radius: 7px;
+      background: rgba(154,70,115,0.07);
+      color: var(--accent);
+    }
+    .lss-card-icon svg { width: 15px; height: 15px; }
+    .lss-card-label {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .lss-card-text {
+      font-size: 14px; font-weight: 300;
+      color: rgba(249,249,249,0.75); line-height: 1.75;
+    }
+    .lss-meta {
+      display: flex; gap: 36px; flex-wrap: wrap;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+    .lss-meta-label {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 5px;
+    }
+    .lss-meta-val {
+      font-size: 13px; font-weight: 600;
+    }
+    .lss-stats {
+      display: flex; gap: 12px;
+    }
+    .lss-stat {
+      flex: 1;
+      padding: 18px 16px;
+      background: rgba(154,70,115,0.07);
+      border: 1px solid rgba(154,70,115,0.2);
+      border-radius: 12px;
+      text-align: center;
+    }
+    .lss-stat-num {
+      font-size: 40px; font-weight: 900;
+      color: var(--accent); line-height: 1;
+      display: block;
+    }
+    .lss-stat-label {
+      font-size: 10px; font-weight: 300;
+      color: var(--muted); letter-spacing: 2px;
+      text-transform: uppercase; margin-top: 6px;
+      display: block;
+    }
+    .lss-phone-col {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 20px;
+    }
+    .lss-phone-frame {
+      width: 300px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(154,70,115,0.3);
+      border-radius: 44px; overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+      position: relative;
+    }
+    .lss-screen-wrap {
+      position: relative;
+      width: 100%; aspect-ratio: 9/19.5;
+      overflow: hidden;
+      background: #1a0a14;
+    }
+    .lss-screen-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+    .lss-screen-img.active { opacity: 1; }
+    .lss-dots {
+      display: flex; gap: 7px; justify-content: center;
+    }
+    .lss-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      transition: background 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .lss-dot.active {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+    @media (max-width: 900px) {
+      .lss-inner { grid-template-columns: 1fr; padding: 60px 24px; }
+      .lss-phone-col { display: none; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .cs-hero-inner, .cs-section, .next-project { padding-left: 24px; padding-right: 24px; }
+      .cs-hero-title { font-size: 60px; }
+      .insights-grid, .gaps-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+      .personas-grid { grid-template-columns: 1fr; }
+.feature-item, .feature-item.reverse { grid-template-columns: 1fr; direction: ltr; gap: 40px; }
+      .feature-screen img { max-height: 380px; }
+      .feature-visual-dual .feature-screen img { max-height: 340px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .takeaway { padding: 80px 24px; }
+      .contact-footer { padding: 80px 24px 0; }
+      .contact-footer-bottom { padding: 24px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-brand">
+      <img src="images/avatar-face.png" alt="Ofir Saportas" class="nav-avatar" />
+      <span class="nav-name">Ofir Saportas</span>
+    </a>
+    <a href="index.html#projects" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Projects
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="cs-hero">
+    <div class="cs-hero-orb cs-hero-orb-1"></div>
+    <div class="cs-hero-orb cs-hero-orb-2"></div>
+
+    <div class="cs-hero-inner">
+      <div class="cs-hero-text">
+        <p class="cs-tag">UX/UI Design &nbsp;·&nbsp; Mobile App</p>
+        <h1 class="cs-hero-title">
+          <span>MEMORE</span>
+        </h1>
+        <p class="cs-hero-subtitle">
+          How does memory look in today's world?<br/>
+          Designing for grief, connection, and the rituals of remembrance.
+        </p>
+        <div class="cs-meta-row">
+          <div class="cs-meta-item">
+            <p class="cs-meta-label">Role</p>
+            <p class="cs-meta-value">UX/UI Designer</p>
+          </div>
+          <div class="cs-meta-item">
+            <p class="cs-meta-label">Type</p>
+            <p class="cs-meta-value">Mobile App</p>
+          </div>
+          <div class="cs-meta-item">
+            <p class="cs-meta-label">Focus</p>
+            <p class="cs-meta-value">UX Research · Information Architecture · UI Design</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hero-phones">
+        <img src="images/memore/COVER.png" class="cs-hero-cover" alt="MEMORE app screens" />
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <div class="cs-section reveal" style="text-align:center; align-items:center; max-width:760px; margin:0 auto; padding-bottom:48px;">
+    <p class="cs-section-label">Overview</p>
+    <h2 class="cs-section-title" style="font-size: clamp(32px, 3.5vw, 48px);">What does grief look like<br/>in the digital age?</h2>
+    <p class="cs-body">In an age where sharing our lives online has become second nature, memory is no longer private. People want to collect memories together, remember their loved ones, and share their emotions.</p>
+    <p class="cs-body" style="margin-top:16px;">This project came from a personal place - my partner lost his father in a terrorist attack. From that pain, and that absence of the right space to grieve together, MEMORE was born.</p>
+  </div>
+
+  <!-- PROBLEM -->
+  <div class="cs-section reveal">
+    <p class="cs-section-label">The Problem</p>
+    <h2 class="cs-section-title">Grief is personal.<br/>But it shouldn't be lonely.</h2>
+    <p class="cs-body">
+      When someone passes, the grief is deeply emotional -yet the tools to coordinate memorial logistics and preserve their story are either non-existent or poorly designed.
+    </p>
+    <p class="cs-body">
+      Existing solutions lack privacy, structure, and emotional safety -forcing people to use WhatsApp or Facebook for something that deserves far more care.
+    </p>
+
+    <div class="gaps-grid">
+      <div class="gap-card">
+        <div class="gap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            <polyline points="12 8 10.5 11 13.5 13 12 16"/>
+          </svg>
+        </div>
+        <div class="gap-title">Emotional needs are unaddressed</div>
+        <div class="gap-desc">Existing solutions lack private, safe spaces for grief. Public platforms expose vulnerability to unwanted audiences.</div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <div class="gap-title">Overwhelming user experience</div>
+        <div class="gap-desc">Confusing navigation and lack of intuitive guidance -the last thing a grieving person needs is a complex interface.</div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="8" height="8" rx="1"/>
+            <rect x="14" y="3" width="8" height="8" rx="1"/>
+            <rect x="2" y="13" width="8" height="8" rx="1"/>
+            <rect x="14" y="13" width="8" height="8" rx="1"/>
+          </svg>
+        </div>
+        <div class="gap-title">No unified platform</div>
+        <div class="gap-desc">No single place combining event planning, memory sharing, and emotional support. People cobble together multiple apps.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HMW STRIP -->
+  <div class="hmw-strip reveal">
+    <p class="hmw-strip-label">How Might We</p>
+    <p class="hmw-strip-text">
+      How might we create a <em>digital space for remembrance</em> that supports <em>shared grief</em> within today's digital culture?
+    </p>
+  </div>
+
+  <hr class="cs-divider" />
+
+  <!-- RESEARCH -->
+  <div class="cs-section reveal" id="research-section">
+    <p class="cs-section-label">Research</p>
+    <h2 class="cs-section-title">Listening before designing</h2>
+    <p class="cs-body">
+      I interviewed 6 people who recently experienced loss and surveyed 20 more -mapping how people preserve memories, coordinate events, and where friction emerges.
+    </p>
+
+    <div class="cs-quote">
+      <p class="cs-quote-text">"It's important to me that her family knows I think about her, and that she still lives with me."</p>
+      <p class="cs-quote-attr">- Friend who was killed</p>
+    </div>
+
+    <!-- Survey Data -->
+    <div class="survey-block">
+      <div class="survey-two-col">
+
+        <!-- Chart 1: Donut -How memorial events are promoted -->
+        <div class="chart-card">
+          <p class="chart-eyebrow">Survey · 12 respondents</p>
+          <h3 class="chart-heading">How are memorial events promoted?</h3>
+          <p class="chart-n">Single choice</p>
+
+          <div class="donut-wrap">
+            <div class="donut-svg-wrap">
+              <svg id="donut-svg" width="160" height="160" viewBox="0 0 160 160">
+                <circle cx="80" cy="80" r="62" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="20"/>
+                <!-- WhatsApp 67% -255.5deg of 377 -->
+                <circle class="donut-seg" cx="80" cy="80" r="62" fill="none"
+                  stroke="#751B41" stroke-width="20"
+                  stroke-dasharray="0 389" stroke-linecap="round"
+                  data-val="260.6" data-total="389"/>
+                <!-- Social 17% -66.1 -->
+                <circle class="donut-seg" cx="80" cy="80" r="62" fill="none"
+                  stroke="#9A4673" stroke-width="20"
+                  stroke-dasharray="0 389" stroke-linecap="round"
+                  data-val="66.1" data-total="389" data-offset="128.4"/>
+                <!-- Newspaper 8% -31.1 -->
+                <circle class="donut-seg" cx="80" cy="80" r="62" fill="none"
+                  stroke="#c08ea9" stroke-width="20"
+                  stroke-dasharray="0 389" stroke-linecap="round"
+                  data-val="31.1" data-total="389" data-offset="62.3"/>
+                <!-- Other 8% -->
+                <circle class="donut-seg" cx="80" cy="80" r="62" fill="none"
+                  stroke="rgba(255,255,255,0.12)" stroke-width="20"
+                  stroke-dasharray="0 389" stroke-linecap="round"
+                  data-val="31.1" data-total="389" data-offset="31.1"/>
+              </svg>
+              <div class="donut-center-label">
+                <span class="donut-big-num">67%</span>
+                <span class="donut-big-sub">WhatsApp</span>
+              </div>
+            </div>
+
+            <div class="donut-legend">
+              <div class="legend-row">
+                <div class="legend-dot" style="background:#751B41"></div>
+                <span class="legend-name">WhatsApp Groups</span>
+                <span class="legend-pct">67%</span>
+              </div>
+              <div class="legend-row">
+                <div class="legend-dot" style="background:#9A4673"></div>
+                <span class="legend-name">Facebook / Social</span>
+                <span class="legend-pct">17%</span>
+              </div>
+              <div class="legend-row">
+                <div class="legend-dot" style="background:#c08ea9"></div>
+                <span class="legend-name">Newspaper Ad</span>
+                <span class="legend-pct">8%</span>
+              </div>
+              <div class="legend-row">
+                <div class="legend-dot" style="background:rgba(255,255,255,0.2)"></div>
+                <span class="legend-name">Other</span>
+                <span class="legend-pct">8%</span>
+              </div>
+              <div style="margin-top:16px; padding:14px 16px; border-radius:8px; background:rgba(255,205,56,0.05); border:1px solid rgba(255,205,56,0.12);">
+                <p style="font-size:12px;font-weight:300;color:rgba(249,249,249,0.7);line-height:1.6;">
+                  <strong style="color:var(--accent)">84%</strong> use tools never designed for grief -WhatsApp or Facebook.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart 2: Icon bars -How people preserve memories -->
+        <div class="chart-card">
+          <p class="chart-eyebrow">Survey · 20 respondents</p>
+          <h3 class="chart-heading">How do you preserve memories?</h3>
+          <p class="chart-n">Multiple choice -% of respondents</p>
+
+          <div class="icon-bar-list" id="icon-bars">
+            <div class="icon-bar-item">
+              <span class="icon-bar-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+              <div class="icon-bar-inner">
+                <span class="icon-bar-label">Stories &amp; oral memory</span>
+                <div class="icon-bar-track"><div class="icon-bar-fill" style="--w:55%"></div></div>
+              </div>
+              <span class="icon-bar-pct">55%</span>
+            </div>
+            <div class="icon-bar-item">
+              <span class="icon-bar-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span>
+              <div class="icon-bar-inner">
+                <span class="icon-bar-label">Physical photos / albums</span>
+                <div class="icon-bar-track"><div class="icon-bar-fill" style="--w:45%"></div></div>
+              </div>
+              <span class="icon-bar-pct">45%</span>
+            </div>
+            <div class="icon-bar-item">
+              <span class="icon-bar-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+              <div class="icon-bar-inner">
+                <span class="icon-bar-label">Related objects</span>
+                <div class="icon-bar-track"><div class="icon-bar-fill" style="--w:30%"></div></div>
+              </div>
+              <span class="icon-bar-pct">30%</span>
+            </div>
+            <div class="icon-bar-item">
+              <span class="icon-bar-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+              <div class="icon-bar-inner">
+                <span class="icon-bar-label">Songs</span>
+                <div class="icon-bar-track"><div class="icon-bar-fill" style="--w:30%"></div></div>
+              </div>
+              <span class="icon-bar-pct">30%</span>
+            </div>
+            <div class="icon-bar-item">
+              <span class="icon-bar-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
+              <div class="icon-bar-inner">
+                <span class="icon-bar-label">Photos on phone / computer</span>
+                <div class="icon-bar-track"><div class="icon-bar-fill" style="--w:25%"></div></div>
+              </div>
+              <span class="icon-bar-pct">25%</span>
+            </div>
+            <div class="icon-bar-item">
+              <span class="icon-bar-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+              <div class="icon-bar-inner">
+                <span class="icon-bar-label">Memorial books</span>
+                <div class="icon-bar-track"><div class="icon-bar-fill" style="--w:25%"></div></div>
+              </div>
+              <span class="icon-bar-pct">25%</span>
+            </div>
+            <div class="icon-bar-item">
+              <span class="icon-bar-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+              <div class="icon-bar-inner">
+                <span class="icon-bar-label">Old letters</span>
+                <div class="icon-bar-track"><div class="icon-bar-fill" style="--w:15%"></div></div>
+              </div>
+              <span class="icon-bar-pct">15%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- What we learned -3 columns -->
+      <div class="survey-findings">
+        <div class="finding-row">
+          <span class="finding-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </span>
+          <p class="finding-text">Memory is something that <strong>occupies people daily</strong> -not only on anniversaries.</p>
+        </div>
+        <div class="finding-row">
+          <span class="finding-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          </span>
+          <p class="finding-text">Preservation is rooted in <strong>stories, photos &amp; shared experiences</strong> with people who knew the person.</p>
+        </div>
+        <div class="finding-row">
+          <span class="finding-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </span>
+          <p class="finding-text">Commemorations are organized on <strong>WhatsApp &amp; social networks</strong> -fragmented, public, unstructured.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MEMORE COVER BAND -->
+  <div class="memore-band">
+    <p class="memore-band-text">MEMORE</p>
+    <div class="memore-band-phones">
+      <img src="images/memore-phone-event.png" alt="MEMORE Event Screen" class="memore-band-phone" />
+      <img src="images/memore-phone-home.png" alt="MEMORE Home Screen" class="memore-band-phone" />
+    </div>
+  </div>
+
+  <!-- COMPETITIVE ANALYSIS -->
+  <div class="cs-section reveal">
+    <p class="cs-section-label">Market Analysis</p>
+    <h2 class="cs-section-title">What's out there<br/>isn't enough</h2>
+    <p class="cs-body">
+      What already exists doesn't fully serve the emotional and practical needs of people in grief.
+    </p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Strengths</th>
+          <th>Key Gap</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Shiva App</td>
+          <td>Practical tools, event coordination</td>
+          <td>Complex, non-intuitive UX and outdated visual design</td>
+        </tr>
+        <tr>
+          <td>Social Media</td>
+          <td>Highly accessible, intuitive, familiar</td>
+          <td>Lacks privacy, structure, and emotional safety</td>
+        </tr>
+        <tr>
+          <td>Yizkor Web</td>
+          <td>Formal memorial structure</td>
+          <td>Feels rigid and emotionally detached -not human</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Core Insight -->
+    <div class="core-insight reveal">
+      <p class="core-insight-eyebrow">Core Insight</p>
+      <p class="core-insight-text">No existing platform allows people to both manage the practical aspects of loss and come together around shared grief in one coherent experience.</p>
+    </div>
+
+    <!-- 3 Points -->
+    <div class="insight-points reveal">
+      <div class="insight-point">
+        <div class="insight-point-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            <line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <p class="insight-point-num">#1</p>
+        <p class="insight-point-title">Emotional needs are not addressed</p>
+        <p class="insight-point-desc">None of the existing solutions offer a safe, private space for grief.</p>
+      </div>
+      <div class="insight-point">
+        <div class="insight-point-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4"/><path d="M12 16h.01"/>
+          </svg>
+        </div>
+        <p class="insight-point-num">#2</p>
+        <p class="insight-point-title">User experience is overwhelming</p>
+        <p class="insight-point-desc">Confusing navigation adds friction for users already in emotional overload.</p>
+      </div>
+      <div class="insight-point">
+        <div class="insight-point-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="8" height="8" rx="1"/>
+            <rect x="14" y="3" width="8" height="8" rx="1"/>
+            <rect x="2" y="13" width="8" height="8" rx="1"/>
+            <rect x="14" y="13" width="8" height="8" rx="1"/>
+          </svg>
+        </div>
+        <p class="insight-point-num">#3</p>
+        <p class="insight-point-title">No unified platform for memory</p>
+        <p class="insight-point-desc">No single place combines event planning, memory sharing, and community support.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="cs-divider" />
+
+  <!-- PERSONAS -->
+  <div class="cs-section reveal">
+    <p class="cs-section-label">User Personas</p>
+    <h2 class="cs-section-title">Designing for two<br/>sides of loss</h2>
+    <p class="cs-body">
+      Two distinct user types emerged -those at the center of grief, and those on the periphery who want to help but don't know how.
+    </p>
+
+    <div class="personas-grid">
+      <div class="persona-card">
+        <img src="images/persona-ofek.jpg" alt="Ofek Levy" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin-bottom:16px;display:block;" />
+        <div class="persona-name">Ofek Levy</div>
+        <div class="persona-role">Primary User · Family Member</div>
+        <p class="persona-text">Grieving family member who lost her younger sister in a <strong>terror attack</strong>. Navigating the <strong>practical and emotional weight of loss</strong> simultaneously.</p>
+
+        <p class="persona-section-label">Goal</p>
+        <p class="persona-text">To <strong>preserve her sister's legacy</strong> and feel quietly supported -without having to ask.</p>
+
+        <p class="persona-section-label">Pain Points</p>
+        <div class="persona-pain">
+          <div class="persona-pain-dot"></div>
+          <p class="persona-text">Feels <strong>emotionally alone</strong>; fears being a burden</p>
+        </div>
+        <div class="persona-pain">
+          <div class="persona-pain-dot"></div>
+          <p class="persona-text">Overwhelmed by the <strong>logistics of memorial coordination</strong></p>
+        </div>
+        <div class="persona-pain">
+          <div class="persona-pain-dot"></div>
+          <p class="persona-text">No single place to <strong>store and share memories</strong> safely</p>
+        </div>
+      </div>
+
+      <div class="persona-card secondary">
+        <img src="images/persona-omer.jpg" alt="Omer Barak" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin-bottom:16px;display:block;" />
+        <div class="persona-name">Omer Barak</div>
+        <div class="persona-role">Secondary User · Close Friend</div>
+        <p class="persona-text">A close friend wanting to offer <strong>meaningful support</strong> without being intrusive -balancing his own responsibilities with the desire to <strong>show up</strong>.</p>
+
+        <p class="persona-section-label">Goal</p>
+        <p class="persona-text">To offer support in a <strong>meaningful way</strong>, at the <strong>right moment</strong>, without overstepping.</p>
+
+        <p class="persona-section-label">Pain Points</p>
+        <div class="persona-pain">
+          <div class="persona-pain-dot"></div>
+          <p class="persona-text">Unsure of <strong>appropriate timing</strong> for reaching out</p>
+        </div>
+        <div class="persona-pain">
+          <div class="persona-pain-dot"></div>
+          <p class="persona-text">No clear way to <strong>contribute meaningfully</strong></p>
+        </div>
+        <div class="persona-pain">
+          <div class="persona-pain-dot"></div>
+          <p class="persona-text">Struggles <strong>balancing support</strong> with own responsibilities</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider" />
+
+  <!-- SOLUTION -->
+  <div class="cs-section reveal">
+    <p class="cs-section-label">The Solution</p>
+    <h2 class="cs-section-title">One empathetic space<br/>for everything</h2>
+    <p class="cs-body">
+      MEMORE unites the emotional and practical sides of remembrance -memorial pages, events, photos, and privacy -so no one has to carry the weight alone.
+    </p>
+
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h14"/><path d="M5 22h14"/><path d="M17 2L7 12l10 10"/><path d="M7 2l10 10L7 22"/></svg></div>
+        <div class="pillar-title">Preserve the Memory</div>
+        <div class="pillar-desc">A living space for stories, photos, and shared memories -a tribute, not a database.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="pillar-title">Organize Memorial Events</div>
+        <div class="pillar-desc">Handles the logistics so the focus stays on people, not planning.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="pillar-title">Coordinate Support</div>
+        <div class="pillar-desc">A shared checklist so the community can contribute -without anyone needing to ask.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="pillar-title">Safe &amp; Private Space</div>
+        <div class="pillar-desc">Full privacy controls so families can share vulnerably within a trusted circle.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider" />
+
+  <!-- UI RESEARCH -->
+  <div class="cs-section reveal">
+    <p class="cs-section-label">UI Research</p>
+    <h2 class="cs-section-title">Learning from<br/>what already works</h2>
+    <p class="cs-body">
+      Before designing, I studied how leading event apps handle discovery, hierarchy, and filters.
+    </p>
+
+    <div class="ui-research-grid">
+
+      <!-- Eventbrite -->
+      <div class="ui-research-item">
+        <div class="ui-research-logo">
+          <img src="https://www.figma.com/api/mcp/asset/6cb39a88-7224-4007-987e-6d156bec06c7" alt="Eventbrite" />
+        </div>
+        <div class="ui-research-phone-wrap">
+          <img src="https://www.figma.com/api/mcp/asset/f505ca8d-0dd6-487d-bfd7-756c1be82854" alt="Eventbrite app" />
+          <div class="ui-research-highlight" style="top:15%;left:4%;width:88%;height:10%"></div>
+        </div>
+        <div class="ui-research-label">
+          <span class="ui-research-dot"></span>
+          <span class="ui-research-label-text">Filters and categories upfront</span>
+        </div>
+      </div>
+
+      <!-- Luma -->
+      <div class="ui-research-item">
+        <div class="ui-research-logo">
+          <img src="https://www.figma.com/api/mcp/asset/3e41fcee-9585-4774-a8bc-84061fdb08e9" alt="Luma" />
+        </div>
+        <div class="ui-research-phone-wrap">
+          <img src="https://www.figma.com/api/mcp/asset/70ebe062-4a15-43d4-9af1-3abe214bac87" alt="Luma app" />
+          <div class="ui-research-highlight" style="top:12%;left:4%;width:92%;height:22%"></div>
+        </div>
+        <div class="ui-research-label">
+          <span class="ui-research-dot"></span>
+          <span class="ui-research-label-text">Upcoming events at the top</span>
+        </div>
+      </div>
+
+      <!-- Meetup -->
+      <div class="ui-research-item">
+        <div class="ui-research-logo">
+          <img src="https://www.figma.com/api/mcp/asset/efc6a2e8-24dc-4e40-9fdc-6fbd043c6d92" alt="Meetup" />
+        </div>
+        <div class="ui-research-phone-wrap">
+          <img src="https://www.figma.com/api/mcp/asset/cc1cf4e0-0619-43ff-8098-7d0ba76fc2e0" alt="Meetup app" />
+          <div class="ui-research-highlight" style="top:8%;left:3%;width:90%;height:13%"></div>
+        </div>
+        <div class="ui-research-label">
+          <span class="ui-research-dot"></span>
+          <span class="ui-research-label-text">Clear discovery with search, filters, and time-based tabs</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="cs-divider" />
+
+  <!-- KEY FEATURES -->
+  <div class="cs-section reveal">
+    <p class="cs-section-label">Key Screens</p>
+    <h2 class="cs-section-title">Designed for the<br/>moments that matter</h2>
+  </div>
+
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 64px 100px;">
+    <div class="features-list">
+
+      <!-- Feature 1: Home -->
+      <div class="feature-item reveal">
+        <div class="feature-meta">
+          <div class="feature-num">01</div>
+          <p class="feature-tag">Home Screen</p>
+          <h3 class="feature-title">Home Page</h3>
+          <p class="feature-desc">
+            Helps users stay connected to meaningful memorial moments by surfacing upcoming events and recent memories in one calm, focused place.
+          </p>
+          <div class="feature-bullets">
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Displays memorial events the user has registered for, helping them stay informed and prepared to participate</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Shows recently completed events and photos in a story-style format, encouraging engagement and connection</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Suggests memorial pages to follow, allowing users to support families and stay connected to the community</div>
+          </div>
+        </div>
+        <div class="feature-visual">
+          <div class="feature-visual-glow"></div>
+          <div class="feature-screen">
+            <img src="https://www.figma.com/api/mcp/asset/e4c43226-f395-4a77-ae90-261c181993e2" alt="Home screen" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: Event Page -->
+      <div class="feature-item reverse reveal">
+        <div class="feature-meta">
+          <div class="feature-num">02</div>
+          <p class="feature-tag">Event Page</p>
+          <h3 class="feature-title">Coordinating Collective Support</h3>
+          <p class="feature-desc">
+            Designed to centralize memorial logistics while providing a seamless way for the community to offer help, reducing the emotional and organizational burden on the family.
+          </p>
+          <div class="feature-bullets">
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Provides immediate access to critical information - time, location, and host - to ensure clarity for all participants</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>A shared checklist that allows guests to claim tasks, turning passive support into tangible help</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>A focused space for event-related discussions, keeping memorial coordination separate from cluttered messaging apps</div>
+          </div>
+        </div>
+        <div class="feature-visual">
+          <div class="feature-visual-glow"></div>
+          <div class="feature-screen">
+            <img src="https://www.figma.com/api/mcp/asset/0950bafa-9657-452f-b88e-e8105b657c52" alt="Event page" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3: Memorial Page -->
+      <div class="feature-item reveal">
+        <div class="feature-meta">
+          <div class="feature-num">03</div>
+          <p class="feature-tag">Memorial Page</p>
+          <h3 class="feature-title">A Collaborative Digital Space for Remembrance</h3>
+          <p class="feature-desc">
+            Brings together all memories, events, and shared content about a loved one in one place.
+          </p>
+          <div class="feature-bullets">
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div><strong style="color:var(--accent);font-weight:600">Memories wall</strong> - presents the life story of the person, written by family or community members</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div><strong style="color:var(--accent);font-weight:600">Events tab</strong> - displays memorial events related to the person, allowing others to participate and commemorate together</div>
+          </div>
+        </div>
+        <div class="feature-visual feature-visual-dual">
+          <div class="feature-visual-glow"></div>
+          <div class="feature-screen">
+            <img src="https://www.figma.com/api/mcp/asset/b0cf4be2-51b1-4b64-b636-44b67216101f" alt="Memories wall" />
+          </div>
+          <div class="feature-screen">
+            <img src="https://www.figma.com/api/mcp/asset/420d7b89-be80-4f33-9c4a-f8a9c3f0ae70" alt="Events tab" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 4: Events Discovery -->
+      <div class="feature-item reverse reveal">
+        <div class="feature-meta">
+          <div class="feature-num">04</div>
+          <p class="feature-tag">Events Discovery</p>
+          <h3 class="feature-title">Events Discovery</h3>
+          <p class="feature-desc">
+            This screen allows users to discover memorial events they can participate in and share with others.
+          </p>
+          <div class="feature-bullets">
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Users can explore memorial events through three discovery tabs: personalized recommendations, events near their location, and events related to memorial pages they follow</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Each event card displays key information such as title, description, location, date, and time - helping users quickly decide whether to participate</div>
+          </div>
+        </div>
+        <div class="feature-visual">
+          <div class="feature-visual-glow"></div>
+          <div class="feature-screen">
+            <img src="https://www.figma.com/api/mcp/asset/ec6ba6ef-c18a-487e-8158-2246cd1497d7" alt="Events discovery" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAKEAWAY -->
+  <div class="takeaway reveal">
+    <p class="takeaway-label">Reflection</p>
+    <h2 class="takeaway-text">Designing for <span>Memory, Loss & Connection</span></h2>
+    <p class="takeaway-body">
+      This project taught me that good design in sensitive domains isn't about adding features -it's about removing friction from the hardest moments. Every pixel is a small act of empathy.
+    </p>
+  </div>
+
+  <!-- NEXT PROJECT -->
+  <div style="width:100%;display:flex;justify-content:center;border-top:1px solid rgba(255,255,255,0.07);">
+    <div style="width:100%;max-width:1100px;padding:60px 64px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <p class="next-label">Back to Portfolio</p>
+        <a href="index.html" class="next-title">← All Projects</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+        <p class="next-label">Next Project</p>
+        <a href="voya.html" class="next-title">VOYA →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="cs-footer-simple">
+    <span class="footer-name">Ofir Saportas</span>
+    <span>All rights reserved © 2026</span>
+  </footer>
+
+  <script>
+    // ─── CURSOR ───
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    (function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '6px'; cursor.style.height = '6px';
+        ring.style.width = '56px'; ring.style.height = '56px';
+        ring.style.borderColor = 'rgba(154,70,115,0.9)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '10px'; cursor.style.height = '10px';
+        ring.style.width = '36px'; ring.style.height = '36px';
+        ring.style.borderColor = 'rgba(154,70,115,0.5)';
+      });
+    });
+
+    // ─── NAV SCROLL ───
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ─── PROGRESS BAR ───
+    const bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (scrolled / total * 100) + '%';
+    });
+
+    // ─── INTERSECTION OBSERVER ───
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // ─── CHART ANIMATIONS ───
+    function animateDonut() {
+      // Each segment: dasharray = [val, total], dashoffset starts at total (hidden), animates to (total - val)
+      // Stagger offset so segments don't overlap: each one sits after the previous
+      const C = 389; // circumference 2πr = 2*3.14159*62
+      const segs = document.querySelectorAll('.donut-seg');
+      // Cumulative offset in reverse (since we rotate -90deg)
+      let cumOffset = 0;
+      segs.forEach((seg, i) => {
+        const val  = parseFloat(seg.dataset.val);
+        const gap  = C - val;
+        seg.style.strokeDasharray = `${val} ${C}`;
+        seg.style.strokeDashoffset = C; // hidden
+        seg.style.strokeDashoffset = -(cumOffset); // position it
+        // animate: we set dasharray to show the segment
+        setTimeout(() => {
+          seg.style.transition = `stroke-dashoffset 0s, stroke-dasharray 1.1s cubic-bezier(0.4,0,0.2,1) ${i * 0.12}s`;
+          seg.style.strokeDasharray = `${val} ${C}`;
+        }, 50);
+        cumOffset += val;
+      });
+    }
+
+    // Proper donut animation using dashoffset
+    function buildDonut() {
+      const C = 2 * Math.PI * 62; // ≈ 389.6
+      const segs = document.querySelectorAll('.donut-seg');
+      const data = [
+        { pct: 0.67, color: '#751B41' },
+        { pct: 0.17, color: '#9A4673' },
+        { pct: 0.08, color: '#c08ea9' },
+        { pct: 0.08, color: 'rgba(255,255,255,0.12)' },
+      ];
+      let angle = 0;
+      segs.forEach((seg, i) => {
+        const arc = data[i].pct * C;
+        const gap = C - arc;
+        seg.style.strokeDasharray = `0 ${C}`;
+        seg.style.strokeDashoffset = `-${angle}`;
+        setTimeout(() => {
+          seg.style.transition = `stroke-dasharray 1.1s cubic-bezier(0.4,0,0.2,1) ${i*0.15}s`;
+          seg.style.strokeDasharray = `${arc} ${gap}`;
+        }, 60);
+        angle += arc;
+      });
+    }
+
+    // ─── ROTATING SCREENS ───
+    const lssScreens = document.querySelectorAll('.lss-screen-img');
+    const lssDots    = document.querySelectorAll('.lss-dot');
+    let lssCurrent   = 0;
+    if (lssScreens.length > 1) {
+      setInterval(() => {
+        lssScreens[lssCurrent].classList.remove('active');
+        lssDots[lssCurrent].classList.remove('active');
+        lssCurrent = (lssCurrent + 1) % lssScreens.length;
+        lssScreens[lssCurrent].classList.add('active');
+        lssDots[lssCurrent].classList.add('active');
+      }, 2800);
+    }
+
+    const chartObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        // Animate icon bars
+        e.target.querySelectorAll('.icon-bar-fill').forEach((b, i) => {
+          setTimeout(() => b.classList.add('animate'), i * 80);
+        });
+        // Animate donut
+        if (e.target.querySelector('.donut-seg')) buildDonut();
+        chartObserver.unobserve(e.target);
+      });
+    }, { threshold: 0.25 });
+    document.querySelectorAll('.chart-card').forEach(c => chartObserver.observe(c));
+  </script>
+  <script src="/mobile-popup.js"></script>
+</body>
+</html>
