@@ -268,8 +268,8 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.62, ease: [0.22, 1, 0.36, 1] }}
             >
-              when i see a problem - whether it&apos;s a product, an app, or a system,
-              i start thinking about the best way to improve it. i enjoy finding
+              when I see a problem - whether it&apos;s a product, an app, or a system,
+              I start thinking about the best way to improve it. I enjoy finding
               creative solutions that make experiences simpler and more intuitive.
             </motion.p>
             <motion.div
