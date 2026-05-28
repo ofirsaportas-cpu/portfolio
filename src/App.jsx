@@ -29,7 +29,7 @@ const PROJECTS = [
   {
     num: '02',
     tag: 'UX / UI Project',
-    title: 'Adopt A Mentor',
+    title: 'AdoptMe',
     description: 'Connecting new adopters with experienced pet parents',
     pills: ['UX Research', 'UI Design', 'Prototyping', 'Usability Testing'],
     accent: '#f43f5e',
