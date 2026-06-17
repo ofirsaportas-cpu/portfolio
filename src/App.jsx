@@ -22,7 +22,7 @@ const PROJECTS = [
     imageRight: true,
     renderImage: () => (
       <div className="proj-img-container">
-        <img src="/images/voya/cover.png" className="proj-img-voya-phone" alt="" />
+        <img src="/images/voya/cover.png?v=2" className="proj-img-voya-phone" alt="" />
       </div>
     ),
   },
