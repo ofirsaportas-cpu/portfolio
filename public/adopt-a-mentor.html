@@ -33,8 +33,8 @@
       --space-xs:  12px;
       --space-sm:  24px;
       --space-md:  48px;
-      --space-lg:  80px;
-      --space-xl:  120px;
+      --space-lg:  60px;
+      --space-xl:  60px;
       --radius-sm: 12px;
       --radius-md: 16px;
       --radius-lg: 24px;
@@ -220,8 +220,8 @@
     }
     .section-label.orange { color: var(--orange); }
     .section-title {
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 900; line-height: 1.1;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 700; line-height: 1.2;
     }
     .body-text {
       font-size: 17px; font-weight: 300;
@@ -347,8 +347,8 @@
       text-transform: uppercase; color: var(--orange);
     }
     .version-title {
-      font-size: clamp(26px, 3.2vw, 42px);
-      font-weight: 900; line-height: 1.1;
+      font-size: clamp(22px, 2.4vw, 32px);
+      font-weight: 700; line-height: 1.2;
     }
     .version-desc {
       font-size: 16px; font-weight: 300;
@@ -532,7 +532,7 @@
       pointer-events: none;
     }
     .takeaway-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); max-width: 900px; }
-    .takeaway-title { font-size: clamp(32px, 4.5vw, 56px); font-weight: 900; line-height: 1.15; }
+    .takeaway-title { font-size: clamp(26px, 3vw, 40px); font-weight: 700; line-height: 1.2; }
     .takeaway-title span {
       background: linear-gradient(135deg, #fff 20%, var(--orange) 60%, var(--rose) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -661,7 +661,7 @@
   <section class="section reveal">
     <div class="section-inner narrow">
       <p class="section-label">Overview</p>
-      <p class="body-text" style="font-size: clamp(16px, 1.5vw, 20px); line-height: 1.8; max-width: 760px;">Adopting a pet for the first time is overwhelming. AdoptMe asked me to design a feature that connects new adopters with experienced mentors - so no one has to figure it out alone.</p>
+      <p class="body-text" style="font-size: clamp(16px, 1.5vw, 20px); line-height: 1.8; max-width: 760px;">I volunteered as a designer for AdoptMe, a nonprofit community for pet adopters. <strong>The brief came from their product manager</strong>: design a way to connect new adopters with experienced mentors.</p>
     </div>
   </section>
 
@@ -671,8 +671,8 @@
   <section class="section reveal">
     <div class="section-inner">
       <p class="section-label">The Problem</p>
-      <h2 class="section-title">There's no one to ask.</h2>
-      <p class="body-text">Many adopters experience frustration and loneliness - because when something feels off, there's simply no one to ask.</p>
+      <h2 class="section-title">Adopting a pet can be overwhelming.</h2>
+      <p class="body-text">This came up from <strong>AdoptMe's own community</strong>: adopters have questions that feel <strong>too small for a vet, but too important to ignore</strong> - and no one to ask.</p>
       <div class="cards-row">
         <div class="card">
           <div class="card-icon">
@@ -699,17 +699,11 @@
     </div>
   </section>
 
-  <!-- ── HMW ── -->
-  <div class="hmw-strip reveal">
-    <p class="section-label">How Might We</p>
-    <p class="hmw-text">How might we give adopters <em>guidance, emotional support, and practical advice</em> from experienced pet owners?</p>
-  </div>
-
   <!-- ── MAIN GOALS ── -->
   <section class="section reveal">
     <div class="section-inner">
       <p class="section-label">Main Goals</p>
-      <h2 class="section-title">Give adopters a human guide - someone who's been there</h2>
+      <h2 class="section-title">What I wanted the feature to do</h2>
       <div class="cards-row">
         <div class="card">
           <div class="card-num">#1</div>
@@ -746,7 +740,7 @@
     <div class="section-inner">
       <p class="section-label">User Personas</p>
       <h2 class="section-title">Two sides of the same connection</h2>
-      <p class="body-text">Two users with opposite relationships to the process - one is looking for help, one is offering it. That asymmetry shaped every design decision.</p>
+      <p class="body-text">Two users with opposite relationships to the process - one is looking for help, one is offering it. That asymmetry shaped every design decision. <strong>I built these personas from real interviews</strong> with both kinds of users.</p>
       <div class="personas-grid">
         <div class="persona-card">
           <div class="persona-header">
@@ -792,22 +786,11 @@
 
   <hr class="divider" />
 
-  <!-- ══════════════════════════════════════
-       V1
-  ══════════════════════════════════════ -->
-  <div class="version-band reveal">
-    <div class="version-inner">
-      <p class="version-tag">Version 01</p>
-      <h2 class="version-title">Location-based auto-matching &amp; web registration</h2>
-      <p class="version-desc">A web form for each user type. The system matches automatically by location alone - no profiles, no browsing, no choice.</p>
-    </div>
-  </div>
-
   <section class="section reveal">
     <div class="section-inner">
       <p class="section-label">V1 - How it worked</p>
-      <h2 class="section-title">The brief, executed simply</h2>
-      <p class="body-text">Following the company's brief, I designed a straightforward registration flow - a form for each user type, with the system automatically matching adopters to mentors based on location only. The mentor would then review the request and approve or decline it.</p>
+      <h2 class="section-title">I followed the brief and built the first version</h2>
+      <p class="body-text">Following <strong>the product manager's brief</strong>, I designed a registration flow that matched adopters to mentors <strong>by location only</strong> - the mentor could then approve or decline the match.</p>
       <img src="images/adopt/new flow.png" alt="V1 Registration Flow" class="img-full" />
       <div style="display:flex;flex-direction:row;gap:20px;align-items:flex-start;margin-top:8px;">
         <div style="flex:376;display:flex;flex-direction:column;gap:12px;">
@@ -838,36 +821,46 @@
       <h2 class="section-title">What V1 taught me</h2>
       <div class="reflection-box">
         <p class="reflection-label">Key Insight</p>
-        <p class="body-text">Long web forms create friction - but the bigger problem was the matching logic. Location alone can't determine a good mentor relationship. It ignores availability, experience, breed, and personality - everything that actually matters.</p>
-        <p class="body-text">The redesign focused on two things: <strong style="color:var(--text)">making registration feel effortless</strong>, and <strong style="color:var(--text)">replacing the algorithm with a community pool - so both sides get to choose</strong>.</p>
+        <div class="cards-row">
+          <div class="card">
+            <div class="card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div class="card-title">The first form felt clunky</div>
+            <div class="card-desc">A usability test showed the form was <strong>inefficient for users</strong>.</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="card-title">Location wasn't enough</div>
+            <div class="card-desc">The brief missed mutual choice - <strong>adopters needed to approve their mentor too</strong>, not just receive one.</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="card-title">Mutual choice</div>
+            <div class="card-desc">I made registration <strong>effortless</strong>, and replaced the algorithm with <strong>a community pool both sides browse and approve</strong>.</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <hr class="divider" />
 
-  <!-- ══════════════════════════════════════
-       V2
-  ══════════════════════════════════════ -->
-  <div class="version-band reveal">
-    <div class="version-inner">
-      <p class="version-tag">Version 02</p>
-      <h2 class="version-title">Mobile-first, visual registration &amp; a mentor pool to choose from</h2>
-      <p class="version-desc">A complete rethink - mobile app, visual onboarding, and a community feed that replaces the algorithm. Users browse real mentor profiles and both sides choose the connection.</p>
-    </div>
-  </div>
-
   <!-- ── DESIGN DECISIONS ── -->
   <section class="section reveal">
     <div class="section-inner">
-      <p class="section-label">Design Decisions</p>
-      <h2 class="section-title">Every change, explained</h2>
+      <p class="section-label">Version 2</p>
+      <h2 class="section-title">Mobile-first, visual registration</h2>
       <div class="decisions-list">
         <div class="decision-card">
           <div class="decision-text">
             <div class="decision-num">Decision 01</div>
-            <h3 class="decision-title"><span>Reducing</span> open text fields</h3>
-            <p class="decision-body">Open text fields were kept only where free input is truly necessary - everything else was replaced with visual tiles and selectors. Less typing, fewer drop-offs, same information collected.</p>
+            <h3 class="decision-title">I replaced open text fields with <span>visual tiles and selectors</span></h3>
+            <p class="decision-body">I kept typing only where free input was truly necessary. <strong>Everything else became tap-to-select tiles</strong>, collecting the same information with far less effort.</p>
           </div>
           <div class="decision-img">
             <video src="images/adopt/decision-1.mp4" autoplay loop muted playsinline style="width:280px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
@@ -876,8 +869,8 @@
         <div class="decision-card reverse">
           <div class="decision-text">
             <div class="decision-num">Decision 02</div>
-            <h3 class="decision-title">From form to <span>guided flow</span></h3>
-            <p class="decision-body">Registration was rebuilt as a visual, choice-based experience - selection tiles and guided steps replace open text fields. Users tap through focused choices instead of filling a form, making it easier to complete while still collecting everything we need.</p>
+            <h3 class="decision-title">I turned the form into <span>a guided, tap-through flow</span></h3>
+            <p class="decision-body">Instead of one static form, <strong>users now tap through a sequence of focused screens</strong> - each one feels like a short step forward, not a form to fill out.</p>
           </div>
           <div class="decision-img">
             <video src="images/adopt/decision-2.mp4" autoplay loop muted playsinline style="width:280px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
@@ -886,8 +879,8 @@
         <div class="decision-card">
           <div class="decision-text">
             <div class="decision-num">Decision 03</div>
-            <h3 class="decision-title">One step at a time, <span>not one long form</span></h3>
-            <p class="decision-body">The registration was split into focused steps - each screen asks for one thing at a time. Users never see the full length upfront, which reduces overwhelm and keeps them moving forward. Smaller steps feel easier to complete, and easier to come back to.</p>
+            <h3 class="decision-title">I split registration into <span>one step at a time</span></h3>
+            <p class="decision-body">I broke the form into focused steps, <strong>each screen asking for one thing at a time</strong>, instead of showing the full length upfront.</p>
           </div>
           <div class="decision-img">
             <video src="images/adopt/decision-3.mp4" autoplay loop muted playsinline style="width:280px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
@@ -904,7 +897,7 @@
     <div class="section-inner" style="align-items:flex-start;">
       <p class="section-label">Key Screens</p>
       <h2 class="section-title">The full V2 flow</h2>
-      <p class="body-text">Each step is a separate screen - keeps users focused and reduces drop-off at every stage of the registration journey.</p>
+      <p class="body-text">Each step is a separate screen, <strong>so users always know what's being asked of them right now.</strong></p>
       <div style="display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;">
         <div class="screens-carousel">
           <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)" aria-label="Previous">
@@ -934,10 +927,9 @@
   <div class="takeaway reveal">
     <div class="takeaway-inner">
       <p class="section-label">Reflection</p>
-      <h2 class="takeaway-title">I started with the interface. <span>The problem was deeper.</span></h2>
-      <p class="takeaway-body">At first, I focused mostly on the interface itself - improving the layout, simplifying the registration flow, and making the experience feel cleaner and more organized.</p>
-      <p class="takeaway-body" style="margin-top:12px;">But over time, I realized the bigger challenge wasn't only the UI. Today, people lose patience quickly with long and exhausting forms - especially in emotional or personal processes like this one.</p>
-      <p class="takeaway-body" style="margin-top:12px;">That realization pushed me to rethink the registration experience entirely - making it feel lighter, more human, and less overwhelming.</p>
+      <h2 class="takeaway-title">What I learned</h2>
+      <p class="takeaway-body"><strong>User testing showed the real problem wasn't just the form - it was the matching logic itself.</strong> Location alone couldn't account for what makes a good mentor relationship, and adopters needed to approve their match, not just receive one.</p>
+      <p class="takeaway-body" style="margin-top:12px;">This was a learning project where I worked through <strong>two versions, each one improving on the last</strong>. The organization is now <strong>testing whether to bring it live</strong> - I'm looking forward to seeing how the community responds, and improving it further with that feedback.</p>
     </div>
   </div>
 
@@ -950,7 +942,7 @@
       </div>
       <div class="next-block right">
         <p class="next-label">Next Project</p>
-        <a href="memore.html" class="next-title">Memore →</a>
+        <a href="waze.html" class="next-title">Feature Concept →</a>
       </div>
     </div>
   </div>

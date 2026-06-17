@@ -246,7 +246,7 @@
     /* ─── CONTENT SECTIONS ─── */
     .cs-section {
       max-width: 1100px; margin: 0 auto;
-      padding: 100px 64px;
+      padding: 60px 64px;
     }
     .cs-section-label {
       font-size: 10px; letter-spacing: 5px;
@@ -254,8 +254,9 @@
       margin-bottom: 16px;
     }
     .cs-section-title {
-      font-size: clamp(40px, 4.5vw, 56px);
-      font-weight: 900; line-height: 1.1;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 700; line-height: 1.2;
+      letter-spacing: -0.01em;
       margin-bottom: 32px; text-wrap: balance;
     }
     .cs-body {
@@ -921,7 +922,7 @@
       margin-bottom: 32px;
     }
     .takeaway-text {
-      font-size: clamp(28px, 4vw, 52px);
+      font-size: clamp(26px, 3vw, 40px);
       font-weight: 700; line-height: 1.2;
       max-width: 800px; margin: 0 auto 32px;
     }
@@ -1185,8 +1186,7 @@
           <span>MEMORE</span>
         </h1>
         <p class="cs-hero-subtitle">
-          How does memory look in today's world?<br/>
-          Designing for grief, connection, and the rituals of remembrance.
+          A mobile app for memorial events, shared memories, and community support during grief.
         </p>
         <div class="cs-meta-row">
           <div class="cs-meta-item">
@@ -1213,20 +1213,15 @@
   <!-- OVERVIEW -->
   <div class="cs-section reveal" style="text-align:center; align-items:center; max-width:760px; margin:0 auto; padding-bottom:48px;">
     <p class="cs-section-label">Overview</p>
-    <h2 class="cs-section-title" style="font-size: clamp(32px, 3.5vw, 48px);">What does grief look like<br/>in the digital age?</h2>
-    <p class="cs-body">In an age where sharing our lives online has become second nature, memory is no longer private. People want to collect memories together, remember their loved ones, and share their emotions.</p>
-    <p class="cs-body" style="margin-top:16px;">This project came from a personal place - my partner lost his father in a terrorist attack. From that pain, and that absence of the right space to grieve together, MEMORE was born.</p>
+    <p class="cs-body">This project came from a personal place - my partner lost his father in a terror attack. He shared the struggle of grieving in the digital world, so we decided to create a platform for it.</p>
   </div>
 
   <!-- PROBLEM -->
   <div class="cs-section reveal">
     <p class="cs-section-label">The Problem</p>
-    <h2 class="cs-section-title">Grief is personal.<br/>But it shouldn't be lonely.</h2>
+    <h2 class="cs-section-title">The digital world wasn't designed for grief</h2>
     <p class="cs-body">
-      When someone passes, the grief is deeply emotional -yet the tools to coordinate memorial logistics and preserve their story are either non-existent or poorly designed.
-    </p>
-    <p class="cs-body">
-      Existing solutions lack privacy, structure, and emotional safety -forcing people to use WhatsApp or Facebook for something that deserves far more care.
+      People end up using WhatsApp or Facebook for something that deserves far more care - there's no private, structured space designed for loss.
     </p>
 
     <div class="gaps-grid">
@@ -1279,9 +1274,9 @@
   <!-- RESEARCH -->
   <div class="cs-section reveal" id="research-section">
     <p class="cs-section-label">Research</p>
-    <h2 class="cs-section-title">Listening before designing</h2>
+    <h2 class="cs-section-title">I talked to people who had experienced loss</h2>
     <p class="cs-body">
-      I interviewed 6 people who recently experienced loss and surveyed 20 more -mapping how people preserve memories, coordinate events, and where friction emerges.
+      I interviewed 6 people who experienced loss and surveyed 20 more - looking at how people preserve memories and coordinate memorial events.
     </p>
 
     <div class="cs-quote">
@@ -1465,9 +1460,9 @@
   <!-- COMPETITIVE ANALYSIS -->
   <div class="cs-section reveal">
     <p class="cs-section-label">Market Analysis</p>
-    <h2 class="cs-section-title">What's out there<br/>isn't enough</h2>
+    <h2 class="cs-section-title">What existing tools offer</h2>
     <p class="cs-body">
-      What already exists doesn't fully serve the emotional and practical needs of people in grief.
+      I looked at what exists and found the same gap everywhere - tools built for events or social sharing, not for grief.
     </p>
 
     <table class="comp-table">
@@ -1549,9 +1544,9 @@
   <!-- PERSONAS -->
   <div class="cs-section reveal">
     <p class="cs-section-label">User Personas</p>
-    <h2 class="cs-section-title">Designing for two<br/>sides of loss</h2>
+    <h2 class="cs-section-title">Two users - two sides of loss</h2>
     <p class="cs-body">
-      Two distinct user types emerged -those at the center of grief, and those on the periphery who want to help but don't know how.
+      From the research, two types of users emerged - the grieving family member, and the people around them who want to help.
     </p>
 
     <div class="personas-grid">
@@ -1559,7 +1554,7 @@
         <img src="images/persona-ofek.jpg" alt="Ofek Levy" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin-bottom:16px;display:block;" />
         <div class="persona-name">Ofek Levy</div>
         <div class="persona-role">Primary User · Family Member</div>
-        <p class="persona-text">Grieving family member who lost her younger sister in a <strong>terror attack</strong>. Navigating the <strong>practical and emotional weight of loss</strong> simultaneously.</p>
+        <p class="persona-text">Lost her younger sister in a terror attack. Dealing with grief and logistics at the same time.</p>
 
         <p class="persona-section-label">Goal</p>
         <p class="persona-text">To <strong>preserve her sister's legacy</strong> and feel quietly supported -without having to ask.</p>
@@ -1583,7 +1578,7 @@
         <img src="images/persona-omer.jpg" alt="Omer Barak" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin-bottom:16px;display:block;" />
         <div class="persona-name">Omer Barak</div>
         <div class="persona-role">Secondary User · Close Friend</div>
-        <p class="persona-text">A close friend wanting to offer <strong>meaningful support</strong> without being intrusive -balancing his own responsibilities with the desire to <strong>show up</strong>.</p>
+        <p class="persona-text">Wants to support without being intrusive - but doesn't know when or how.</p>
 
         <p class="persona-section-label">Goal</p>
         <p class="persona-text">To offer support in a <strong>meaningful way</strong>, at the <strong>right moment</strong>, without overstepping.</p>
@@ -1610,9 +1605,9 @@
   <!-- SOLUTION -->
   <div class="cs-section reveal">
     <p class="cs-section-label">The Solution</p>
-    <h2 class="cs-section-title">One empathetic space<br/>for everything</h2>
+    <h2 class="cs-section-title">An app to share grief together</h2>
     <p class="cs-body">
-      MEMORE unites the emotional and practical sides of remembrance -memorial pages, events, photos, and privacy -so no one has to carry the weight alone.
+      I designed MEMORE to combine the emotional and practical sides of grief in one place - memorial pages, events, shared tasks, and private spaces.
     </p>
 
     <div class="pillars-grid">
@@ -1644,7 +1639,7 @@
   <!-- UI RESEARCH -->
   <div class="cs-section reveal">
     <p class="cs-section-label">UI Research</p>
-    <h2 class="cs-section-title">Learning from<br/>what already works</h2>
+    <h2 class="cs-section-title">UI Research</h2>
     <p class="cs-body">
       Before designing, I studied how leading event apps handle discovery, hierarchy, and filters.
     </p>
@@ -1653,12 +1648,8 @@
 
       <!-- Eventbrite -->
       <div class="ui-research-item">
-        <div class="ui-research-logo">
-          <img src="https://www.figma.com/api/mcp/asset/6cb39a88-7224-4007-987e-6d156bec06c7" alt="Eventbrite" />
-        </div>
         <div class="ui-research-phone-wrap">
-          <img src="https://www.figma.com/api/mcp/asset/f505ca8d-0dd6-487d-bfd7-756c1be82854" alt="Eventbrite app" />
-          <div class="ui-research-highlight" style="top:15%;left:4%;width:88%;height:10%"></div>
+          <img src="images/memore/UI-1.png" alt="Eventbrite app" />
         </div>
         <div class="ui-research-label">
           <span class="ui-research-dot"></span>
@@ -1668,12 +1659,8 @@
 
       <!-- Luma -->
       <div class="ui-research-item">
-        <div class="ui-research-logo">
-          <img src="https://www.figma.com/api/mcp/asset/3e41fcee-9585-4774-a8bc-84061fdb08e9" alt="Luma" />
-        </div>
         <div class="ui-research-phone-wrap">
-          <img src="https://www.figma.com/api/mcp/asset/70ebe062-4a15-43d4-9af1-3abe214bac87" alt="Luma app" />
-          <div class="ui-research-highlight" style="top:12%;left:4%;width:92%;height:22%"></div>
+          <img src="images/memore/UI- 2.png" alt="Luma app" />
         </div>
         <div class="ui-research-label">
           <span class="ui-research-dot"></span>
@@ -1683,12 +1670,8 @@
 
       <!-- Meetup -->
       <div class="ui-research-item">
-        <div class="ui-research-logo">
-          <img src="https://www.figma.com/api/mcp/asset/efc6a2e8-24dc-4e40-9fdc-6fbd043c6d92" alt="Meetup" />
-        </div>
         <div class="ui-research-phone-wrap">
-          <img src="https://www.figma.com/api/mcp/asset/cc1cf4e0-0619-43ff-8098-7d0ba76fc2e0" alt="Meetup app" />
-          <div class="ui-research-highlight" style="top:8%;left:3%;width:90%;height:13%"></div>
+          <img src="images/memore/UI- 3.png" alt="Meetup app" />
         </div>
         <div class="ui-research-label">
           <span class="ui-research-dot"></span>
@@ -1704,7 +1687,7 @@
   <!-- KEY FEATURES -->
   <div class="cs-section reveal">
     <p class="cs-section-label">Key Screens</p>
-    <h2 class="cs-section-title">Designed for the<br/>moments that matter</h2>
+    <h2 class="cs-section-title">The four main screens</h2>
   </div>
 
   <div style="max-width: 1100px; margin: 0 auto; padding: 0 64px 100px;">
@@ -1717,18 +1700,18 @@
           <p class="feature-tag">Home Screen</p>
           <h3 class="feature-title">Home Page</h3>
           <p class="feature-desc">
-            Helps users stay connected to meaningful memorial moments by surfacing upcoming events and recent memories in one calm, focused place.
+            Shows upcoming events and recent memories in one focused place.
           </p>
           <div class="feature-bullets">
-            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Displays memorial events the user has registered for, helping them stay informed and prepared to participate</div>
-            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Shows recently completed events and photos in a story-style format, encouraging engagement and connection</div>
-            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Suggests memorial pages to follow, allowing users to support families and stay connected to the community</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Upcoming events the user registered for</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Recent events and photos in story format</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Memorial pages to follow and stay connected</div>
           </div>
         </div>
         <div class="feature-visual">
           <div class="feature-visual-glow"></div>
           <div class="feature-screen">
-            <img src="https://www.figma.com/api/mcp/asset/e4c43226-f395-4a77-ae90-261c181993e2" alt="Home screen" />
+            <img src="images/memore/homepage.png" alt="Home screen" />
           </div>
         </div>
       </div>
@@ -1738,20 +1721,20 @@
         <div class="feature-meta">
           <div class="feature-num">02</div>
           <p class="feature-tag">Event Page</p>
-          <h3 class="feature-title">Coordinating Collective Support</h3>
+          <h3 class="feature-title">Event page - logistics and community task list</h3>
           <p class="feature-desc">
-            Designed to centralize memorial logistics while providing a seamless way for the community to offer help, reducing the emotional and organizational burden on the family.
+            Centralizes logistics so the community can help without anyone needing to ask.
           </p>
           <div class="feature-bullets">
-            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Provides immediate access to critical information - time, location, and host - to ensure clarity for all participants</div>
-            <div class="feature-bullet"><div class="feature-bullet-dot"></div>A shared checklist that allows guests to claim tasks, turning passive support into tangible help</div>
-            <div class="feature-bullet"><div class="feature-bullet-dot"></div>A focused space for event-related discussions, keeping memorial coordination separate from cluttered messaging apps</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Time, location, and host at a glance</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Shared checklist - guests can claim tasks</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Event chat, separate from WhatsApp</div>
           </div>
         </div>
         <div class="feature-visual">
           <div class="feature-visual-glow"></div>
           <div class="feature-screen">
-            <img src="https://www.figma.com/api/mcp/asset/0950bafa-9657-452f-b88e-e8105b657c52" alt="Event page" />
+            <img src="images/memore/event page.png" alt="Event page" />
           </div>
         </div>
       </div>
@@ -1761,7 +1744,7 @@
         <div class="feature-meta">
           <div class="feature-num">03</div>
           <p class="feature-tag">Memorial Page</p>
-          <h3 class="feature-title">A Collaborative Digital Space for Remembrance</h3>
+          <h3 class="feature-title">Memorial page - a shared space for stories and photos</h3>
           <p class="feature-desc">
             Brings together all memories, events, and shared content about a loved one in one place.
           </p>
@@ -1773,10 +1756,10 @@
         <div class="feature-visual feature-visual-dual">
           <div class="feature-visual-glow"></div>
           <div class="feature-screen">
-            <img src="https://www.figma.com/api/mcp/asset/b0cf4be2-51b1-4b64-b636-44b67216101f" alt="Memories wall" />
+            <img src="images/memore/memorial wall.png" alt="Memories wall" />
           </div>
           <div class="feature-screen">
-            <img src="https://www.figma.com/api/mcp/asset/420d7b89-be80-4f33-9c4a-f8a9c3f0ae70" alt="Events tab" />
+            <img src="images/memore/event tab.png" alt="Events tab" />
           </div>
         </div>
       </div>
@@ -1788,17 +1771,17 @@
           <p class="feature-tag">Events Discovery</p>
           <h3 class="feature-title">Events Discovery</h3>
           <p class="feature-desc">
-            This screen allows users to discover memorial events they can participate in and share with others.
+            Browse memorial events to join.
           </p>
           <div class="feature-bullets">
-            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Users can explore memorial events through three discovery tabs: personalized recommendations, events near their location, and events related to memorial pages they follow</div>
-            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Each event card displays key information such as title, description, location, date, and time - helping users quickly decide whether to participate</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Three tabs: recommended, nearby, and from followed memorial pages</div>
+            <div class="feature-bullet"><div class="feature-bullet-dot"></div>Each card shows title, location, and date</div>
           </div>
         </div>
         <div class="feature-visual">
           <div class="feature-visual-glow"></div>
           <div class="feature-screen">
-            <img src="https://www.figma.com/api/mcp/asset/ec6ba6ef-c18a-487e-8158-2246cd1497d7" alt="Events discovery" />
+            <img src="images/memore/calender.png" alt="Events discovery" />
           </div>
         </div>
       </div>
@@ -1809,9 +1792,9 @@
   <!-- TAKEAWAY -->
   <div class="takeaway reveal">
     <p class="takeaway-label">Reflection</p>
-    <h2 class="takeaway-text">Designing for <span>Memory, Loss & Connection</span></h2>
+    <h2 class="takeaway-text">What I <span>learned</span></h2>
     <p class="takeaway-body">
-      This project taught me that good design in sensitive domains isn't about adding features -it's about removing friction from the hardest moments. Every pixel is a small act of empathy.
+      I learned that in sensitive domains, good design means removing friction - not adding features. The challenge was knowing what not to include.
     </p>
   </div>
 

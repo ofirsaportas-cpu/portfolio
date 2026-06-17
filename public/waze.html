@@ -21,8 +21,8 @@
       --space-xs:  12px;
       --space-sm:  24px;
       --space-md:  48px;
-      --space-lg:  80px;
-      --space-xl:  120px;
+      --space-lg:  60px;
+      --space-xl:  60px;
       --radius-sm: 12px;
       --radius-md: 16px;
       --radius-lg: 24px;
@@ -192,8 +192,8 @@
       text-transform: uppercase; color: var(--accent);
     }
     .section-title {
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 900; line-height: 1.1; text-wrap: balance;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 700; line-height: 1.2; text-wrap: balance;
     }
     .body-text {
       font-size: 17px; font-weight: 300;
@@ -350,42 +350,41 @@
     /* ─── DESIGN DECISIONS ─── */
     .decisions-list {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
     .decision-card {
-      background: #111;
+      background: #2a2a2a;
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 32px 28px;
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
       display: flex; flex-direction: column;
       align-items: flex-start; gap: 16px;
     }
     .decision-icon {
-      flex-shrink: 0; width: 52px; height: 52px;
-      border: 1px solid rgba(50,204,254,0.2);
-      border-radius: var(--radius-sm);
+      flex-shrink: 0; width: 48px; height: 48px;
+      border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(50,204,254,0.05);
+      background: rgba(50,204,254,0.08);
+      border: 1px solid rgba(50,204,254,0.2);
     }
-    .decision-icon svg { width: 26px; height: 26px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .decision-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
     .decision-content {
       flex: 1; display: flex; flex-direction: column; gap: 10px;
     }
     .decision-num {
-      font-size: 10px; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--muted);
+      display: none;
     }
     .decision-title {
-      font-size: 20px; font-weight: 700;
+      font-size: 17px; font-weight: 700;
     }
     .decision-body {
       display: none;
     }
     .decision-rule {
-      font-size: 13px; font-weight: 600;
-      color: var(--accent); letter-spacing: 0.5px;
-      padding-top: 4px;
+      font-size: 13px; font-weight: 400;
+      color: rgba(249,249,249,0.55);
+      line-height: 1.6;
     }
 
     /* ─── OUTCOME / TAKEAWAY ─── */
@@ -402,7 +401,7 @@
       pointer-events: none;
     }
     .takeaway-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); max-width: 900px; }
-    .takeaway-title { font-size: clamp(32px, 4.5vw, 56px); font-weight: 900; line-height: 1.15; text-wrap: balance; }
+    .takeaway-title { font-size: clamp(26px, 3vw, 40px); font-weight: 700; line-height: 1.2; text-wrap: balance; }
     .takeaway-title span {
       background: linear-gradient(135deg, #fff 20%, var(--accent) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -424,6 +423,101 @@
       transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── FLOW LAYOUT ─── */
+    .flow-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .flow-group-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .parker-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+    }
+    .parker-screen {
+      flex: 0 0 220px;
+    }
+    .parker-screen img {
+      width: 220px;
+      border-radius: 20px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+    .flow-side-text {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(249,249,249,0.68);
+      line-height: 1.85;
+      max-width: 360px;
+    }
+    .driver-flow {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 20px;
+    }
+    .flow-arrow {
+      font-size: 24px;
+      color: var(--accent);
+      align-self: center;
+      padding-top: 32px;
+      flex-shrink: 0;
+    }
+    .flow-screen {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 0 0 220px;
+    }
+    .flow-screen img {
+      width: 220px;
+      border-radius: 20px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+    .flow-step-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      min-height: 2.8em;
+      display: flex;
+      align-items: flex-start;
+      text-align: center;
+      justify-content: center;
+    }
+    .additional-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 220px);
+      gap: 32px;
+      justify-content: center;
+    }
+    .additional-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .additional-card img {
+      width: 220px;
+      border-radius: 20px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+    .additional-body {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(249,249,249,0.6);
+      line-height: 1.7;
+    }
 
     @media (max-width: 900px) {
       .hero-inner { flex-direction: column; padding: 100px 24px 60px; }
@@ -490,21 +584,25 @@
       <div class="hero-orb hero-orb-2"></div>
       <div class="hero-inner">
         <div class="hero-text">
-          <p class="tag">Feature Design · Waze</p>
+          <p class="tag">Self-Initiated Concept · Feature Design</p>
           <h1 class="hero-title">
             Street<br/><span>Parking</span>
           </h1>
           <p class="hero-subtitle">
-            A Waze feature concept for real-time street parking guidance - powered by community signals, built for the last mile.
+            A concept feature design for crowdsourced street parking in Waze.
           </p>
           <div class="meta-row">
             <div class="meta-item">
-              <span class="meta-label">Role</span>
-              <span class="meta-value">UX / UI Designer</span>
+              <span class="meta-label">Type</span>
+              <span class="meta-value">Concept Only</span>
             </div>
             <div class="meta-item">
-              <span class="meta-label">Type</span>
-              <span class="meta-value">Feature Concept</span>
+              <span class="meta-label">My Role</span>
+              <span class="meta-value">Solo Designer</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Scope</span>
+              <span class="meta-value">Research · UX · UI</span>
             </div>
             <div class="meta-item">
               <span class="meta-label">Platform</span>
@@ -522,12 +620,7 @@
     <section class="section reveal">
       <div class="section-inner narrow" style="padding-bottom: 80px;">
         <p class="section-label">Overview</p>
-        <h2 class="section-title">A smarter moment.</h2>
-        <div style="display: flex; flex-direction: column; gap: 24px; text-align: center; max-width: 680px;">
-          <p class="body-text" style="text-align: center; max-width: 680px;">As someone who lives in the city without private parking, I know the frustration of arriving at your destination... and realizing the drive still isn't over.</p>
-          <p class="body-text" style="text-align: center; max-width: 680px;">The endless circling, searching, and hoping someone might leave.</p>
-          <p class="body-text" style="text-align: center; max-width: 680px;">That made me think: if Waze already uses real-time community data to help drivers navigate traffic - why not use it to help people find street parking too?</p>
-        </div>
+        <p class="body-text" style="text-align: center; max-width: 680px;">As someone without home parking, finding a spot is one of the most frustrating things I deal with daily - and I know I'm not alone. I wanted to use an existing platform to solve a problem that takes up real time for a lot of people.</p>
       </div>
     </section>
 
@@ -537,19 +630,19 @@
     <section class="section reveal">
       <div class="section-inner" style="align-items: flex-start;">
         <p class="section-label">The Problem</p>
-        <h2 class="section-title">The most frustrating part of the drive happens last.</h2>
+        <h2 class="section-title">Finding parking takes too much of our time</h2>
         <p class="body-text">
-          Navigation ends when you reach the destination. But finding a place to park is where drivers lose time, patience, and confidence. It's the part of the journey no one has fully solved - and Waze is no exception.
+          Waze helps drivers reach their destination — but stops there. Street parking is left to chance. It's the last part of the drive, and the most frustrating.
         </p>
         <div class="stat-block reveal">
           <div class="stat-number">55h</div>
           <div class="stat-text">
-            <span class="stat-label">The average driver wastes 55 hours a year<br/>searching for a parking spot.</span>
+            <span class="stat-label">is how long the average driver spends searching for a parking spot - every year.</span>
             <span class="stat-source">Source: INRIX Global Traffic Scorecard</span>
           </div>
         </div>
         <p class="body-text">
-          Parking anxiety creates a ripple effect: unnecessary traffic from circling, increased emissions, and a degraded driving experience at the exact moment it should feel resolved.
+          Drivers spend that time circling, creating extra traffic and uncertainty — at the exact moment the drive should feel resolved.
         </p>
       </div>
     </section>
@@ -560,9 +653,9 @@
     <section class="section reveal">
       <div class="section-inner" style="align-items: flex-start;">
         <p class="section-label">Current Experience</p>
-        <h2 class="section-title">Waze gets you there, but doesn't help you park.</h2>
+        <h2 class="section-title">What Waze does today - and what's missing</h2>
         <p class="body-text">
-          Waze recently added parking-related indicators near the destination. It's a step in the right direction - but the experience is still incomplete.
+          Waze added parking lot indicators near destinations. A step forward — but street parking is still not addressed.
         </p>
         <div class="gap-grid">
           <div class="gap-card now">
@@ -600,10 +693,27 @@
     <section class="section reveal">
       <div class="section-inner narrow">
         <p class="section-label">The Solution</p>
-        <h2 class="section-title">Community-powered, passive by design.</h2>
-        <p class="body-text" style="text-align: center;">
-          Street Parking is a lightweight Waze feature that surfaces real-time parking signals directly on the map. It works the same way Waze already handles traffic reports and hazards - community data, smart probability, no promises. When a driver leaves a street spot, a quiet prompt captures the signal. When a driver approaches their destination, the map shows where that spot might still be available.
+        <h2 class="section-title">Using Waze's signal model to surface available street parking</h2>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── TESTING ── -->
+    <section class="section reveal">
+      <div class="section-inner" style="align-items: flex-start;">
+        <p class="section-label">Testing</p>
+        <h2 class="section-title">Testing the design language</h2>
+        <p class="body-text">
+          Before designing anything, I studied how Waze's visual language works - the icons they use for traffic reports, hazards, and points of interest, and how those signals communicate meaning to drivers at a glance. From there, I explored several icon directions for the street parking feature, testing which visual cues felt native to Waze and which felt foreign or confusing.
         </p>
+        <img src="images/waze/testing.png?v=2" alt="Icon testing for Waze street parking feature" style="width: 100%; border-radius: var(--radius-lg); margin-top: 8px;" />
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:16px; margin-top:16px; text-align:center; width:100%;">
+          <h3 style="font-size: 20px; font-weight: 700;">What I chose</h3>
+          <img src="images/waze/what i choose.png" alt="Chosen parking icon" style="width: 180px; border-radius: var(--radius-md);" />
+          <p class="body-text" style="text-align:center;">I chose the familiar parking icon Waze already uses - but in green to signal the spot is free and accessible. Parking lots remain in blue.</p>
+        </div>
       </div>
     </section>
 
@@ -611,103 +721,59 @@
 
     <!-- ── KEY MOMENTS ── -->
     <section class="section reveal">
-      <div class="section-inner" style="align-items: flex-start;">
+      <div class="section-inner" style="align-items: flex-start; gap: 64px;">
         <p class="section-label">Feature Experience</p>
-        <h2 class="section-title">Five moments, one flow.</h2>
+        <h2 class="section-title">How the feature works</h2>
 
-        <div class="moments-list">
-
-          <!-- Moment 1 -->
-          <div class="moment reveal">
-            <div class="moment-text">
-              <span class="moment-num">Moment 01</span>
-              <h3 class="moment-title">Driver leaves<br/>a parking spot</h3>
-              <p class="moment-body">
-                When Waze detects a driver starting a new drive, a brief non-blocking prompt appears: "Leaving a parking spot?" The driver can confirm with Yes - or simply ignore it. The prompt dismisses itself automatically. Either way, the signal is captured.
-              </p>
-              <span class="moment-tag">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
-                Auto-dismiss · no forced interaction
-              </span>
+        <!-- THE PARKER -->
+        <div class="flow-group reveal">
+          <p class="flow-group-label">The Parker</p>
+          <div class="parker-row">
+            <div class="parker-screen">
+              <img src="images/waze/screen-leaving.png" alt="Leaving a parking spot" />
             </div>
-            <div class="moment-image">
-              <img src="images/waze/screen-leaving.png" alt="Leaving a parking spot prompt" />
+            <div style="display:flex; flex-direction:column; gap:12px; text-align:left;">
+              <p class="flow-step-title" style="text-align:left; justify-content:flex-start;">Leaving a parking spot</p>
+              <p class="flow-side-text">When a new drive starts, Waze shows a quick prompt to understand if the driver is leaving a parking spot.</p>
             </div>
           </div>
-
-          <!-- Moment 2 -->
-          <div class="moment reverse reveal">
-            <div class="moment-text">
-              <span class="moment-num">Moment 02</span>
-              <h3 class="moment-title">Driver approaches<br/>the destination</h3>
-              <p class="moment-body">
-                As the driver nears their destination, street parking indicators appear directly on the map. Green icons signal potential street spots. Blue icons remain for parking lots, as Waze already shows. A green icon with a subtle glow means the signal is recent - a driver may have just left that spot.
-              </p>
-              <span class="moment-tag">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                Green = street · Blue = parking lot
-              </span>
-            </div>
-            <div class="moment-image">
-              <img src="images/waze/screen-map.png" alt="Map with street parking indicators" />
-            </div>
-          </div>
-
-          <!-- Moment 3 -->
-          <div class="moment reveal">
-            <div class="moment-text">
-              <span class="moment-num">Moment 03</span>
-              <h3 class="moment-title">Driver taps a parking spot</h3>
-              <p class="moment-body">
-                When a driver taps on a green street parking icon on the map, Waze surfaces a navigation prompt - the same familiar "Navigate" button, now pointing to a street spot instead of a destination. No new UI to learn. Just the next natural step.
-              </p>
-              <span class="moment-tag">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-                Familiar Waze navigation, new use case
-              </span>
-            </div>
-            <div class="moment-image">
-              <img src="images/waze/screen-tap.png" alt="Driver taps parking spot to navigate" />
-            </div>
-          </div>
-
-          <!-- Moment 4 -->
-          <div class="moment reverse reveal">
-            <div class="moment-text">
-              <span class="moment-num">Moment 04</span>
-              <h3 class="moment-title">High-confidence signal, navigate to a spot</h3>
-              <p class="moment-body">
-                When confidence is high - a signal is recent and close to the driver's destination - Waze shows a small bottom card: "Spot likely available." The driver can tap Navigate for a lightweight detour, or Skip to continue. No rerouting. No disruption.
-              </p>
-              <span class="moment-tag">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.07 3.18 2 2 0 0 1 3.04 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.41-1.41a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                "Spot likely available" - Navigate or Skip
-              </span>
-            </div>
-            <div class="moment-image">
-              <img src="images/waze/screen-spot.png" alt="Spot likely available prompt" />
-            </div>
-          </div>
-
-          <!-- Moment 5 -->
-          <div class="moment reveal">
-            <div class="moment-text">
-              <span class="moment-num">Moment 05</span>
-              <h3 class="moment-title">User controls the feature</h3>
-              <p class="moment-body">
-                Street parking search can be turned on or off directly from Waze's settings. Users who don't want the prompts can opt out - keeping the experience fully in their control. No hidden behavior, no forced nudges.
-              </p>
-              <span class="moment-tag">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-                Optional - always in the user's control
-              </span>
-            </div>
-            <div class="moment-image">
-              <img src="images/waze/screen-settings.png?v=2" alt="Waze settings with street parking toggle" />
-            </div>
-          </div>
-
         </div>
+
+        <!-- THE DRIVER -->
+        <div class="flow-group reveal">
+          <p class="flow-group-label">The Driver</p>
+          <div class="driver-flow">
+            <div class="flow-screen">
+              <p class="flow-step-title">Approaching the destination</p>
+              <img src="images/waze/screen-spot.png" alt="Driver approaches destination" />
+              <p class="additional-body">As the driver nears the destination, a suggestion appears for a nearby available spot.</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-screen">
+              <p class="flow-step-title">Navigating to a free spot</p>
+              <img src="images/waze/navigate to parking.png" alt="Driver navigates to parking" />
+              <p class="additional-body">If the driver confirms, the system navigates them to the available parking spot.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADDITIONAL CASES -->
+        <div class="flow-group reveal">
+          <p class="flow-group-label">Additional interactions</p>
+          <div class="additional-grid">
+            <div class="additional-card">
+              <p class="flow-step-title">Tapping a spot on the map</p>
+              <img src="images/waze/screen-tap.png" alt="Tapping a parking spot" />
+              <p class="additional-body">Tap any green icon on the map to navigate to that spot.</p>
+            </div>
+            <div class="additional-card">
+              <p class="flow-step-title">User controls the feature</p>
+              <img src="images/waze/screen-settings.png" alt="Settings toggle" />
+              <p class="additional-body">The feature can be toggled on or off in settings.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -717,7 +783,7 @@
     <section class="section reveal">
       <div class="section-inner" style="align-items: flex-start;">
         <p class="section-label">Design Decisions</p>
-        <h2 class="section-title">The thinking behind the design.</h2>
+        <h2 class="section-title">Why I made these decisions</h2>
 
         <div class="decisions-list">
 
@@ -726,22 +792,9 @@
               <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
             </div>
             <div class="decision-content">
-              <span class="decision-num">Decision 01</span>
-              <h3 class="decision-title">No full-screen popup</h3>
-              <p class="decision-body">The driver approaching their destination is in a high cognitive-load moment - actively navigating, watching for turns, managing traffic. A full-screen interruption would be dangerous and dismissive of the context. All interactions live at the bottom of the screen, non-blocking and glanceable.</p>
-              <span class="decision-rule">→ Respect the driving context above all else.</span>
-            </div>
-          </div>
-
-          <div class="decision-card reveal">
-            <div class="decision-icon">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-            </div>
-            <div class="decision-content">
-              <span class="decision-num">Decision 02</span>
-              <h3 class="decision-title">Passive by default, proactive only when confident</h3>
-              <p class="decision-body">The system stays quiet most of the time. Street parking indicators appear on the map, but Waze only surfaces an active prompt when confidence is high - a signal is recent, nearby, and relevant. Interrupting the driver for weak signals would erode trust quickly.</p>
-              <span class="decision-rule">→ Earn the driver's attention. Don't demand it.</span>
+              <span class="decision-num">01</span>
+              <h3 class="decision-title">No popups while driving</h3>
+              <span class="decision-rule">I placed all prompts at the bottom so drivers aren't interrupted.</span>
             </div>
           </div>
 
@@ -750,10 +803,9 @@
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
             </div>
             <div class="decision-content">
-              <span class="decision-num">Decision 03</span>
-              <h3 class="decision-title">Green vs. blue - a clear visual distinction</h3>
-              <p class="decision-body">Waze already uses blue icons for parking lots. Introducing a green icon for street parking creates an immediate, learnable distinction - without adding any new UI element the user needs to read or understand. The color does the work.</p>
-              <span class="decision-rule">→ Green = street opportunity. Blue = parking lot.</span>
+              <span class="decision-num">02</span>
+              <h3 class="decision-title">Green for street, blue for lots</h3>
+              <span class="decision-rule">I reused Waze's existing color system.</span>
             </div>
           </div>
 
@@ -762,10 +814,9 @@
               <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
             <div class="decision-content">
-              <span class="decision-num">Decision 04</span>
-              <h3 class="decision-title">"Likely available" - honest language builds trust</h3>
-              <p class="decision-body">The feature never says "parking available." It says "Spot likely available." This distinction is intentional. The system is probabilistic - like all of Waze. Overpromising would break trust the first time a driver arrives and finds the spot taken. Wording that reflects probability protects the product's credibility.</p>
-              <span class="decision-rule">→ "Likely" is not a weakness. It's honesty.</span>
+              <span class="decision-num">03</span>
+              <h3 class="decision-title">Says "likely", not "available"</h3>
+              <span class="decision-rule">The spot might be taken - I designed the copy to reflect that.</span>
             </div>
           </div>
 
@@ -778,9 +829,9 @@
     <!-- ── OUTCOME ── -->
     <div class="takeaway reveal">
       <div class="takeaway-inner">
-        <p class="section-label">Final Outcome</p>
-        <h2 class="takeaway-title">A street-level problem, <span>solved by the street.</span></h2>
-        <p class="takeaway-body">Street Parking adds a missing layer to the Waze experience - one that works with the product's existing behavior, not against it. By leveraging the community-based reporting model Waze already runs on, the feature turns every driver who leaves a parking spot into a real-time signal for every driver still searching. The result: less random circling, reduced uncertainty, and a driving experience that finally feels resolved from start to finish.</p>
+        <p class="section-label">Takeaway</p>
+        <h2 class="takeaway-title">What I <span>learned</span></h2>
+        <p class="takeaway-body">Designing within an existing product's model is a real constraint. I had to study how Waze's signals, icons, and interactions work before touching anything. The concept works because it doesn't change the product — it extends it. Every driver who leaves a spot becomes a signal for the next one.</p>
       </div>
     </div>
 
@@ -793,7 +844,7 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
         <p style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#6b7280;margin:0;">Next Project</p>
-        <a href="adopt-a-mentor.html" style="font-size:24px;font-weight:900;color:#f9f9f9;text-decoration:none;">Adopt A Mentor →</a>
+        <a href="memore.html" style="font-size:24px;font-weight:900;color:#f9f9f9;text-decoration:none;">Memore →</a>
       </div>
     </div>
   </div>

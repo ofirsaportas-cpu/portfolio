@@ -19,8 +19,8 @@
       --space-xs:  12px;
       --space-sm:  24px;
       --space-md:  48px;
-      --space-lg:  80px;
-      --space-xl:  120px;
+      --space-lg:  60px;
+      --space-xl:  60px;
       --radius-sm: 12px;
       --radius-md: 16px;
       --radius-lg: 24px;
@@ -130,7 +130,7 @@
     .tag { font-size: 10px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: var(--teal); }
     .hero-title {
       font-size: clamp(64px, 10vw, 112px);
-      font-weight: 900; line-height: 0.9; letter-spacing: -3px; text-align: left;
+      font-weight: 700; line-height: 0.9; letter-spacing: -3px; text-align: left;
     }
     .hero-title span {
       display: block;
@@ -147,7 +147,7 @@
     /* ─── SECTION LABELS & HEADINGS ─── */
     .section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--teal); }
     .section-label.orange { color: var(--orange); }
-    .section-title { font-size: clamp(32px, 4vw, 52px); font-weight: 900; line-height: 1.1; text-wrap: balance; }
+    .section-title { font-size: clamp(26px, 3vw, 38px); font-weight: 700; line-height: 1.2; text-wrap: balance; }
     .body-text { font-size: 17px; font-weight: 300; color: rgba(249,249,249,0.72); line-height: 1.9; max-width: 720px; text-wrap: pretty; }
 
     /* ─── HMW STRIP ─── */
@@ -254,7 +254,7 @@
     .decision-img img { width: 260px; border-radius: 20px; box-shadow: 0 20px 80px rgba(0,0,0,0.4); display: block; }
     .decision-img .placeholder-img { width: 260px; aspect-ratio: 9/16; }
     .decision-num { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); }
-    .decision-title { font-size: 28px; font-weight: 700; line-height: 1.2; text-wrap: balance; }
+    .decision-title { font-size: 22px; font-weight: 700; line-height: 1.3; text-wrap: balance; }
     .decision-title span {
       background: linear-gradient(135deg, var(--teal), var(--orange));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -302,7 +302,7 @@
       gap: 48px;
     }
     .version-tag { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--orange); }
-    .version-title { font-size: clamp(26px, 3.2vw, 42px); font-weight: 900; line-height: 1.1; text-wrap: balance; }
+    .version-title { font-size: clamp(22px, 2.4vw, 32px); font-weight: 700; line-height: 1.2; text-wrap: balance; }
     .version-desc { font-size: 16px; font-weight: 300; color: rgba(249,249,249,0.6); line-height: 1.8; max-width: 680px; text-wrap: pretty; }
 
     /* ─── REFLECTION ─── */
@@ -319,7 +319,7 @@
       pointer-events: none;
     }
     .takeaway-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); max-width: 900px; }
-    .takeaway-title { font-size: clamp(32px, 4.5vw, 56px); font-weight: 900; line-height: 1.15; text-wrap: balance; }
+    .takeaway-title { font-size: clamp(26px, 3vw, 40px); font-weight: 700; line-height: 1.2; text-wrap: balance; }
     .takeaway-title span {
       background: linear-gradient(135deg, #fff 20%, var(--teal) 60%, var(--orange) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -403,7 +403,7 @@
     <div class="hero-orb hero-orb-2"></div>
     <div class="hero-inner">
       <div class="hero-text">
-        <p class="tag">UX Design · Onboarding Redesign</p>
+        <p class="tag">UX/UI Design · Onboarding Redesign</p>
         <h1 class="hero-title">
           <span>VOYA</span>
         </h1>
@@ -426,7 +426,7 @@
   <section class="section reveal">
     <div class="section-inner narrow">
       <p class="section-label">Overview</p>
-      <p class="body-text" style="font-size: clamp(16px, 1.5vw, 20px); line-height: 1.8; max-width: 760px;">VOYA is a lifestyle app that collects your saved reels from social media, organizes them on a map, and helps you turn inspiration into real travel plans - with an AI trip planner and personalized recommendations. I joined the startup to redesign the onboarding experience from the ground up.</p>
+      <p class="body-text" style="font-size: clamp(16px, 1.5vw, 20px); line-height: 1.8; max-width: 760px;">I joined VOYA's team to <strong>redesign their onboarding</strong>, building on a <strong>first version that was made with AI</strong>.</p>
     </div>
   </section>
 
@@ -436,81 +436,71 @@
   <section class="section reveal">
     <div class="section-inner">
       <p class="section-label">The Problem</p>
-      <h2 class="section-title">Strong product, weak first impression.</h2>
-      <p class="body-text">The original onboarding was built with AI and shipped fast - but it wasn't doing its job. It didn't reflect the aspirational lifestyle the app promises, and it was losing users before they even got started.</p>
+      <h2 class="section-title">The original onboarding didn't work</h2>
+      <p class="body-text">The original onboarding was built with AI and shipped fast. <strong>It didn't show the lifestyle the app promises, and it asked too much before giving anything back.</strong></p>
       <div class="cards-row">
         <div class="card">
           <div class="card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13.5V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.5"/><path d="M12 3v13"/><path d="m8 7 4-4 4 4"/></svg>
           </div>
           <div class="card-title">Missing the brand vibe</div>
-          <div class="card-desc">The visual language felt generic - it didn't communicate the luxury lifestyle and wanderlust the app was built around.</div>
+          <div class="card-desc">The visual style didn't show <strong>the luxury travel feeling</strong> the app is built around.</div>
         </div>
         <div class="card">
           <div class="card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
           <div class="card-title">Questions without purpose</div>
-          <div class="card-desc">Users were asked multiple personal questions with no clear reason - creating friction without delivering any visible value in return.</div>
+          <div class="card-desc">Users answered personal questions <strong>with no clear reason and no value in return.</strong></div>
         </div>
         <div class="card">
           <div class="card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
           </div>
           <div class="card-title">Unclear value, weak paywall</div>
-          <div class="card-desc">Users reached the payment screen without fully understanding what they were paying for - and a 12-month plan made the price feel overwhelming.</div>
+          <div class="card-desc">Users reached payment <strong>without understanding what they were paying for.</strong></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HMW -->
-  <div class="hmw-strip reveal">
-    <p class="section-label">How Might We</p>
-    <p class="hmw-text">How might we make the onboarding feel as <em>aspirational and effortless</em> as the lifestyle VOYA promises?</p>
-  </div>
-
-
   <!-- ORIGINAL SCREENS + FINDINGS -->
   <section class="section reveal">
     <div class="section-inner">
       <p class="section-label">The original flow</p>
-      <h2 class="section-title">Lots of questions. No explanation. No feeling.</h2>
-      <p class="body-text" style="max-width:720px;">Three moments where the original onboarding lost users - before they ever saw what the app could do.</p>
-      <div style="display:flex;flex-direction:row;gap:32px;align-items:flex-start;margin-top:var(--space-sm);justify-content:center;width:100%;flex-wrap:wrap;">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
-          <img src="images/voya/original-1.jpeg" style="width:240px;border-radius:20px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid var(--border);" />
+      <h2 class="section-title">The original flow</h2>
+      <p class="body-text" style="max-width:720px;"><strong>Three moments in the original flow where users were asked for something before they saw any value.</strong></p>
+      <div style="display:flex;flex-direction:row;gap:64px;align-items:flex-start;margin-top:var(--space-sm);justify-content:center;width:100%;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;flex:1;max-width:240px;">
           <div style="text-align:center;">
             <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">01</p>
-            <p style="font-size:15px;font-weight:600;">No hook, no feeling</p>
-            <p style="font-size:13px;font-weight:300;color:rgba(249,249,249,0.5);margin-top:4px;max-width:200px;">A splash screen that didn't communicate what the app is about</p>
+            <p style="font-size:15px;font-weight:600;max-width:220px;margin:0 auto;">A splash screen that doesn't capture the spirit of the app</p>
           </div>
+          <img src="images/voya/original-1.jpeg" style="width:100%;border-radius:20px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid var(--border);" />
         </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
-          <video src="images/voya/original-2.mp4" autoplay loop muted playsinline style="width:240px;border-radius:20px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid var(--border);"></video>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;flex:1;max-width:240px;">
           <div style="text-align:center;">
             <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">02</p>
-            <p style="font-size:15px;font-weight:600;">Questions with no payoff</p>
-            <p style="font-size:13px;font-weight:300;color:rgba(249,249,249,0.5);margin-top:4px;max-width:200px;">Multiple personal questions before users understood what they were signing up for</p>
+            <p style="font-size:15px;font-weight:600;max-width:220px;margin:0 auto;">Several personal questions before showing any value</p>
           </div>
+          <video src="images/voya/original-2.mp4" autoplay loop muted playsinline style="width:100%;border-radius:20px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid var(--border);"></video>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
-          <img src="images/voya/original-3.jpeg" style="width:240px;border-radius:20px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid var(--border);" />
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;flex:1;max-width:240px;">
           <div style="text-align:center;">
             <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">03</p>
-            <p style="font-size:15px;font-weight:600;">A paywall that felt like a wall</p>
-            <p style="font-size:13px;font-weight:300;color:rgba(249,249,249,0.5);margin-top:4px;max-width:200px;">Users reached the payment screen without understanding what they were paying for</p>
+            <p style="font-size:15px;font-weight:600;max-width:220px;margin:0 auto;">A payment screen before users understood the app</p>
           </div>
+          <img src="images/voya/original-3.jpeg" style="width:100%;border-radius:20px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid var(--border);" />
         </div>
       </div>
       <div class="cards-row" style="margin-top:var(--space-md);">
         <div class="card" style="border-left:3px solid var(--teal);">
           <div class="card-title">What I found</div>
-          <p class="card-desc">Users were dropping off mid-flow. The questions felt like a survey, not a welcome - and by the time they reached the app, some had already lost interest in what it could offer.</p>
+          <p class="card-desc">The questions felt like a survey, not a welcome. <strong>By the time users reached the app, the questions had already used up their patience.</strong></p>
         </div>
         <div class="card" style="border-left:3px solid var(--orange);">
           <div class="card-title">The core tension</div>
-          <p class="card-desc">The product team's need to know the user clashed with the user's need to feel the app first. That conflict lived in every screen - and asking too much, too early, cost them conversions.</p>
+          <p class="card-desc">The founders wanted to ask questions to build investment early. <strong>I believed the user needed to feel the app's value first.</strong> That tension shaped every screen.</p>
         </div>
       </div>
     </div>
@@ -522,53 +512,40 @@
   <section class="section reveal">
     <div class="section-inner">
       <p class="section-label">Research</p>
-      <h2 class="section-title">I looked at what the best apps do differently.</h2>
-      <p class="body-text">Before designing, I mapped the competitive landscape, studied the vibe I wanted to create, and identified what matters most to the user in the first 60 seconds of an app.</p>
+      <h2 class="section-title">Market research</h2>
+      <p class="body-text"><strong>Before designing, I looked at competitor apps, studied the visual style I wanted to create, and looked at what users need in the first 60 seconds</strong> of using an app.</p>
       <div class="research-grid">
         <div class="research-card">
           <p class="research-tag">Competitor Analysis</p>
           <h3 class="research-title">Similar apps + the best in the world</h3>
-          <p class="research-body">I analyzed direct competitors in the travel space, and then looked beyond - at Airbnb, Spotify, and other top-tier apps that nail their first impression. The goal: understand what separates a forgettable onboarding from one that actually converts.</p>
+          <p class="research-body">I looked at travel apps and also top apps like Airbnb and Spotify <strong>to see what makes a first impression actually work.</strong></p>
         </div>
         <div class="research-card">
           <p class="research-tag">Vibe Research</p>
           <h3 class="research-title">The aesthetic of wanderlust</h3>
-          <p class="research-body">I explored the visual language of luxury travel - the colors, photography style, and typography that communicate "this is the life you want." That became the visual north star for the redesign.</p>
+          <p class="research-body">I studied the visual style of luxury travel - the colors, photos, and fonts <strong>that say "this is the life you want."</strong></p>
         </div>
         <div class="research-card">
           <p class="research-tag">User Needs Mapping</p>
           <h3 class="research-title">What users need in 60 seconds</h3>
-          <p class="research-body">In the first minute, users need to understand: what is this? what do I get? and why now? The original onboarding answered none of these clearly. The redesign was built around answering all three.</p>
+          <p class="research-body">In the first minute, users need to know: <strong>what is this, what do I get, and why now.</strong> The redesign answers all three.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <hr class="divider" />
-
-  <!-- V2 VERSION BAND -->
-  <div class="version-band" style="border-color:rgba(236,101,43,0.2);background:linear-gradient(90deg,rgba(236,101,43,0.06),rgba(92,199,206,0.03));">
-    <div class="version-inner">
-      <div style="white-space:nowrap;">
-        <div class="version-tag" style="color:var(--teal);">Version 02</div>
-        <h2 class="version-title" style="margin-top:8px;">Show first,<br/>ask less, convert more</h2>
-      </div>
-      <p class="version-desc">Instead of starting with questions, V2 starts with one lightweight moment of connection - then earns commitment by showing users what they'll get. Every screen has one job, and nothing comes before value.</p>
-    </div>
-  </div>
-
   <!-- DESIGN DECISIONS -->
   <section class="section reveal">
     <div class="section-inner">
       <p class="section-label">Design Decisions</p>
-      <h2 class="section-title">Three things that changed everything</h2>
+      <h2 class="section-title">Three changes to the flow</h2>
       <div class="decisions-list">
 
         <div class="decision-card">
           <div class="decision-text">
             <div class="decision-num">Decision 01</div>
-            <h3 class="decision-title">A <span>welcoming first screen</span> - with far fewer questions</h3>
-            <p class="decision-body">The original flow opened cold and asked too much, too fast. I redesigned the splash screen to immediately communicate the app's vibe and aspirational feel - and cut the questions down to only what's essential, so users move forward without friction.</p>
+            <h3 class="decision-title"><span>Reduced the questions</span> to one</h3>
+            <p class="decision-body">The founders wanted to keep several questions to build investment. I believed most of them weren't worth asking. <strong>We agreed on one question, and replaced the rest with short videos showing the real app in use.</strong></p>
           </div>
           <div class="decision-img">
             <video src="images/voya/decision-1.mp4" autoplay loop muted playsinline style="width:260px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
@@ -578,8 +555,8 @@
         <div class="decision-card reverse">
           <div class="decision-text">
             <div class="decision-num">Decision 02</div>
-            <h3 class="decision-title"><span>Show the value</span> before asking for anything</h3>
-            <p class="decision-body">Before asking users to pay or commit, the redesign takes them through the key features - what the map looks like, how the AI planner works, and what they'll actually get. Users arrive at the paywall already convinced.</p>
+            <h3 class="decision-title"><span>Showed value with videos</span> before asking anything</h3>
+            <p class="decision-body">Before asking users to pay, <strong>I added a few screens showing the app's real features</strong> - the map, the AI trip planner, and what they'd actually get.</p>
           </div>
           <div class="decision-img">
             <video src="images/voya/decision-2.MP4" autoplay loop muted playsinline style="width:260px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
@@ -589,8 +566,8 @@
         <div class="decision-card">
           <div class="decision-text">
             <div class="decision-num">Decision 03</div>
-            <h3 class="decision-title">Sell the <span>lifestyle, not the subscription</span></h3>
-            <p class="decision-body">The payment screen was redesigned to feel like the destination, not a form. We also removed the 12-month plan - it made the price feel heavy before users were ready. The focus shifted to the experience they're unlocking, not the cost.</p>
+            <h3 class="decision-title"><span>Removed the 12-month plan</span> and simplified payment</h3>
+            <p class="decision-body">I wanted the vacation feeling to carry through to checkout, so <strong>I redesigned the payment screen to feel less like a form.</strong> The founder and I also <strong>removed the 12-month plan</strong> - it felt like a long commitment for a user who hadn't even taken a trip with the app yet.</p>
           </div>
           <div class="decision-img">
             <video src="images/voya/decision-3.mp4" autoplay loop muted playsinline style="width:260px;border-radius:20px;box-shadow:0 20px 80px rgba(0,0,0,0.4);display:block;"></video>
@@ -605,9 +582,9 @@
   <div class="takeaway reveal">
     <div class="takeaway-inner">
       <p class="section-label">Reflection</p>
-      <h2 class="takeaway-title">From <span>AI output to human feeling</span></h2>
-      <p class="takeaway-body">The biggest lesson from this project: onboarding isn't about collecting information - it's about making a promise. Every screen should earn the next tap. The moment we stopped asking users for data and started showing them what they'd gain, everything felt better.</p>
-      <p class="takeaway-body" style="margin-top:12px;">The redesign is currently heading into user testing. I'm looking forward to seeing whether the aspiration actually converts.</p>
+      <h2 class="takeaway-title">What I learned</h2>
+      <p class="takeaway-body">The biggest thing I learned: <strong>onboarding should prove value before asking for anything.</strong></p>
+      <p class="takeaway-body" style="margin-top:12px;">The redesign hasn't launched yet, so <strong>I don't have data on how it performs</strong> - but I can't wait to see the numbers once it's live.</p>
     </div>
   </div>
 
@@ -620,7 +597,7 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
         <p style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#6b7280;margin:0;">Next Project</p>
-        <a href="waze.html" style="font-size:24px;font-weight:900;color:#f9f9f9;text-decoration:none;">Waze →</a>
+        <a href="adopt-a-mentor.html" style="font-size:24px;font-weight:900;color:#f9f9f9;text-decoration:none;">AdoptMe →</a>
       </div>
     </div>
   </div>
